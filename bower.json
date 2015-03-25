@@ -1,0 +1,9 @@
+{
+  "name": "wow",
+  "version": "0.0.1",
+  "dependencies": {
+    "polymer": "Polymer/polymer#^0.5.5",
+    "core-ajax": "Polymer/core-ajax#~0.5.5"
+  },
+  "devDependencies": {}
+}
