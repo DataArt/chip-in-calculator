@@ -1,0 +1,42 @@
+doctype html(lang='')
+head
+  meta(charset='utf-8')
+  meta(name='description', content='')
+  meta(name='viewport', content='width=device-width, initial-scale=1')
+  title poly foo
+  // Place favicon.ico and apple-touch-icon.png in the root directory
+  // build:css styles/main.css
+  link(rel='stylesheet', href='styles/main.css')
+  // endbuild
+  // build:js bower_components/webcomponentsjs/webcomponents.min.js
+  script(src='bower_components/webcomponentsjs/webcomponents.js')
+  // endbuild
+  // will be replaced with elements/elements.vulcanized.html
+  link(rel='import', href='elements/elements.html')
+  // endreplace
+  body(unresolved='', fullbleed='', layout='', vertical='')
+    template#app(is='auto-binding')
+      core-drawer-panel
+        // Drawer
+        core-header-panel(drawer='')
+          // Drawer Toolbar
+          core-toolbar Menu
+          // Drawer Content
+          core-menu(selected='0')
+            core-item(label='Yo')
+            core-item(label='Polymer')
+            core-item(label='App')
+        // Main
+        core-header-panel(main='')
+          // Main Toolbar
+          core-toolbar
+            paper-icon-button(icon='menu', core-drawer-toggle='')
+            span {{appName}}
+          // Main Content
+          .hero-unit
+            yo-greeting
+            p You now have
+            yo-list
+    // build:js scripts/app.js
+    script(src='scripts/app.js')
+    // endbuild
