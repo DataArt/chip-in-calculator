@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "devDependencies": {
     "apache-server-configs": "^2.7.1",
+    "autoprefixer-stylus": "^0.5.0",
     "browser-sync": "^1.3.0",
     "coffee-script": "^1.9.1",
     "del": "^0.1.2",
@@ -10,6 +11,7 @@
     "gulp-autoprefixer": "^0.0.8",
     "gulp-cache": "^0.2.2",
     "gulp-changed": "^1.0.0",
+    "gulp-coffee": "^2.3.1",
     "gulp-cssmin": "^0.1.6",
     "gulp-flatten": "^0.0.2",
     "gulp-if": "^1.2.5",
@@ -21,6 +23,7 @@
     "gulp-rename": "^1.2.0",
     "gulp-replace": "^0.4.0",
     "gulp-size": "^1.0.0",
+    "gulp-stylus": "^2.0.1",
     "gulp-uglify": "^0.3.1",
     "gulp-uncss": "^0.4.5",
     "gulp-useref": "^0.6.0",

@@ -1,16 +1,15 @@
 'use strict'
 # Include Gulp & Tools We'll Use
 gulp = require('gulp')
-$ = require('gulp-load-plugins')()
+Plugin = require('gulp-load-plugins')()
 del = require('del')
 runSequence = require('run-sequence')
 browserSync = require('browser-sync')
 pagespeed = require('psi')
 reload = browserSync.reload
-merge = require('merge-stream')
-path = require('path')
-gulpIf = require 'gulp-if'
-jade = require 'gulp-jade'
+merge = require 'merge-stream'
+path = require 'path'
+stylusAutoprefixer = require 'autoprefixer-stylus'
 
 AUTOPREFIXER_BROWSERS = [
   'ie >= 10'
@@ -28,19 +27,20 @@ styleTask = (stylesPath, srcs) ->
   gulp.src(srcs.map((src) ->
     path.join 'app', stylesPath, src
   ))
-  .pipe($.changed(stylesPath, extension: '.css'))
-  .pipe($.autoprefixer(AUTOPREFIXER_BROWSERS))
-  .pipe(gulp.dest('.tmp/' + stylesPath))
-  .pipe($.if('*.css', $.cssmin()))
-  .pipe(gulp.dest('dist/' + stylesPath))
-  .pipe $.size(title: stylesPath)
+  #.pipe(Plugin.changed stylesPath, extension: '.css')
+  .pipe(Plugin.autoprefixer AUTOPREFIXER_BROWSERS)
+  .pipe(gulp.dest ".tmp/#{stylesPath}")
+  .pipe(Plugin.if '*.styl', Plugin.stylus(), Plugin.cssmin())
+  .pipe(Plugin.if '*.css', Plugin.cssmin())
+  .pipe(gulp.dest "dist/#{stylesPath}")
+  .pipe(Plugin.size title: stylesPath)
 
 # Compile and Automatically Prefix Stylesheets
 gulp.task 'styles', ->
-  styleTask 'styles', ['**/*.css']
+  styleTask 'styles', ['**/*.css', '**/*.styl']
 
 gulp.task 'elements', ->
-  styleTask 'elements', ['**/*.css']
+  styleTask 'elements', ['**/*.css', '**/*.styl']
 
 gulp.task 'jshint', ->
   gulp.src([
@@ -49,16 +49,16 @@ gulp.task 'jshint', ->
     'app/elements/**/*.html'
   ])
   .pipe(reload(stream: true, once: true))
-  .pipe($.jshint.extract())
-  .pipe($.jshint())
-  .pipe($.jshint.reporter('jshint-stylish'))
-  .pipe($.if(!browserSync.active, $.jshint.reporter('fail')))
+  .pipe(Plugin.jshint.extract())
+  .pipe(Plugin.jshint())
+  .pipe(Plugin.jshint.reporter('jshint-stylish'))
+  .pipe(Plugin.if(!browserSync.active, Plugin.jshint.reporter('fail')))
 
 gulp.task 'images', ->
   gulp.src('app/images/**/*')
-  .pipe($.cache($.imagemin(progressive: true, interlaced: true)))
+  .pipe(Plugin.cache(Plugin.imagemin(progressive: true, interlaced: true)))
   .pipe(gulp.dest('dist/images'))
-  .pipe($.size(title: 'images'))
+  .pipe(Plugin.size(title: 'images'))
 
 gulp.task 'copy', ->
   app = gulp.src([
@@ -66,7 +66,9 @@ gulp.task 'copy', ->
       '!app/test'
       'node_modules/apache-server-configs/dist/.htaccess'
   ], dot: true)
-  .pipe(gulpIf /[.]jade/, jade())
+  .pipe(Plugin.if '*.jade', Plugin.jade())
+  .pipe(Plugin.if '*.styl', Plugin.stylus())
+  .pipe(Plugin.if '*.coffee', Plugin.coffee())
   .pipe(gulp.dest('dist'))
 
   bower = gulp.src(['bower_components/**/*'])
@@ -76,19 +78,19 @@ gulp.task 'copy', ->
   .pipe(gulp.dest('dist/elements'))
 
   vulcanized = gulp.src(['app/elements/elements.html'])
-  .pipe($.rename('elements.vulcanized.html'))
+  .pipe(Plugin.rename('elements.vulcanized.html'))
   .pipe(gulp.dest('dist/elements'))
 
   merge(app, bower, elements, vulcanized)
-  .pipe($.size(title: 'copy'))
+  .pipe(Plugin.size(title: 'copy'))
 
 gulp.task 'fonts', ->
   gulp.src(['app/fonts/**'])
   .pipe(gulp.dest('dist/fonts'))
-  .pipe($.size(title: 'fonts'))
+  .pipe(Plugin.size(title: 'fonts'))
 
 gulp.task 'html', ->
-  assets = $.useref.assets(searchPath: [
+  assets = Plugin.useref.assets(searchPath: [
     '.tmp'
     'app'
     'dist'
@@ -97,21 +99,23 @@ gulp.task 'html', ->
     'app/**/*.html'
     '!app/{elements,test}/**/*.html'
   ])
-  .pipe($.if('*.html', $.replace('elements/elements.html', 'elements/elements.vulcanized.html')))
+  .pipe(Plugin.if('*.html', Plugin.replace('elements/elements.html', 'elements/elements.vulcanized.html')))
   .pipe(assets)
-  .pipe($.if('*.js', $.uglify(preserveComments: 'some')))
-  .pipe($.if('*.css', $.cssmin()))
+  .pipe(Plugin.if('*.coffee', Plugin.coffee(), Plugin.uglify(preserveComments: 'some')))
+  .pipe(Plugin.if('*.js', Plugin.uglify(preserveComments: 'some')))
+  .pipe(Plugin.if('*.styl', Plugin.stylus(), Plugin.cssmin()))
+  .pipe(Plugin.if('*.css', Plugin.cssmin()))
   .pipe(assets.restore())
-  .pipe($.useref())
-  .pipe($.if('*.html', $.minifyHtml(quotes: true, empty: true, spare: true)))
-  .pipe(gulp.dest('dist')).pipe $.size(title: 'html')
+  .pipe(Plugin.useref())
+  .pipe(Plugin.if('*.html', Plugin.minifyHtml(quotes: true, empty: true, spare: true)))
+  .pipe(gulp.dest('dist')).pipe Plugin.size(title: 'html')
 
 gulp.task 'vulcanize', ->
   DEST_DIR = 'dist/elements'
   gulp.src('dist/elements/elements.vulcanized.html')
-  .pipe($.vulcanize(dest: DEST_DIR, strip: true, inline: true))
+  .pipe(Plugin.vulcanize(dest: DEST_DIR, strip: true, inline: true))
   .pipe(gulp.dest(DEST_DIR))
-  .pipe($.size(title: 'vulcanize'))
+  .pipe(Plugin.size(title: 'vulcanize'))
 
 gulp.task 'clean', del.bind(null, [
   '.tmp'
