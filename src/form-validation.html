@@ -1,0 +1,25 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/iron-validator-behavior/iron-validator-behavior.html">
+
+<script>
+
+    Polymer({
+
+        is: 'text-only',
+
+        behaviors: [
+            Polymer.IronValidatorBehavior
+        ],
+
+        validate: function(values) {
+            if (typeof values === 'object') {
+                return this.validateObject(values);
+            } else {
+                var value = Array.isArray(values) ? values.join('') : values;
+                return value.match(/^(c|ca|cat|cats)?$/) !== null;
+            }
+        }
+
+    });
+
+</script>

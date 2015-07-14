@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="../bower_components/webcomponentsjs/webcomponents.min.js"></script>
+    <link rel="import" href="../bower_components/paper-styles/paper-styles.html">
+    <link rel="import" href="../bower_components/paper-header-panel/paper-header-panel.html">
+    <link rel="import" href="../bower_components/paper-toolbar/paper-toolbar.html">
+    <link rel="import" href="../bower_components/iron-icons/iron-icons.html">
+    <link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
+    <link rel="import" href="../bower_components/paper-input/paper-input.html">
+    <link rel="import" href="../bower_components/paper-item/paper-item.html">
+    <link rel="import" href="../bower_components/paper-button/paper-button.html">
+    <link rel="import" href="../bower_components/iron-input/iron-input.html">
+    <link rel="import" href="../bower_components/iron-ajax/iron-ajax.html">
+    <link rel="import" href="../bower_components/iron-list/iron-list.html">
+
+    <!--<link rel="import" href="../bower_components/polymer/polymer.html">
+    <link rel="import" href="../bower_components/iron-flex-layout/classes/iron-flex-layout.html">-->
+
+
+    <link rel="stylesheet" href="styles.css"/>
+
+</head>
+<body unresolved class="fullbleed layout vertical">
+
+
+<template is="dom-bind">
+
+    <iron-ajax url="data.json" last-response="{{data}}" auto></iron-ajax>
+
+    <paper-header-panel mode="scroll">
+        <paper-toolbar class="tall"> <h1>Hello world</h1> </paper-toolbar>
+        <div class="content fit">
+
+            <iron-list items="[[data]]" as="item">
+                <template>
+                    <div class="list short">
+                        <!-- iron-list with paper-items -->
+                        <paper-item>
+                            <paper-input error-message="Invalid input" label="Name" value="[[item.name]]"></paper-input>
+                            <paper-input error-message="Invalid input" label="Money" value="[[item.money]]"></paper-input>
+                        </paper-item>
+                    </div>
+                </template>
+            </iron-list>
+            <paper-icon-button icon="add"></paper-icon-button>
+
+        </div>
+    </paper-header-panel>
+
+</template>
+
+
+</body>
+</html>
