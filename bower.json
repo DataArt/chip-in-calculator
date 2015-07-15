@@ -28,6 +28,7 @@
     "paper-header-panel": "PolymerElements/paper-header-panel#~1.0.2",
     "paper-styles": "PolymerElements/paper-styles#~1.0.9",
     "paper-elements": "PolymerElements/paper-elements#~1.0.1",
-    "iron-elements": "PolymerElements/iron-elements#~1.0.2"
+    "iron-elements": "PolymerElements/iron-elements#~1.0.2",
+    "polymer-themes": "~1.0.1"
   }
 }
