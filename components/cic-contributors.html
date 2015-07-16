@@ -1,0 +1,43 @@
+<link rel="import" href="../bower_components/paper-item/paper-item.html">
+<link rel="import" href="../bower_components/iron-ajax/iron-ajax.html">
+<link rel="import" href="cic-contributor.html">
+
+<dom-module id="cic-contributors">
+
+    <style></style>
+
+    <template>
+
+        <h3>Contributors:</h3>
+
+        <template is="dom-repeat" items="{{_transformData(contributors)}}">
+            <cic-contributor name="{{item.name}}" money="{{item.money}}"></cic-contributor>
+        </template>
+
+    </template>
+
+</dom-module>
+
+<script>
+    Polymer({
+        is: "cic-contributors",
+
+        properties: {
+            contributors: {
+                type: Array,
+                value: function(){
+                    return []
+                }
+            }
+        },
+
+        ready: function(){
+            console.log(this.contributors);
+        },
+
+        _transformData: function(d) {
+            console.log(d);
+            return d
+        }
+    });
+</script>
