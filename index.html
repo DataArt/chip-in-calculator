@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="bower_components/webcomponentsjs/webcomponents-lite.min.js"></script>
+    <link rel="import" href="bower_components/polymer/polymer.html">
+    <link rel="import" href="bower_components/paper-header-panel/paper-header-panel.html">
+    <link rel="import" href="bower_components/paper-toolbar/paper-toolbar.html">
+    <link rel="import" href="bower_components/paper-material/paper-material.html">
+
+    <link rel="import" href="components/cic-add-contributor.html">
+    <link rel="import" href="components/cic-contributors.html">
+
+    <!-- reference to the theme https://polymerthemes.com/technology/ -->
+    <link rel="import" href="bower_components/polymer-themes/technology.html">
+    <link rel="stylesheet" href="styles/styles.css"/>
+
+</head>
+<body unresolved class="fullbleed layout vertical">
+
+    <template is="dom-bind">
+        <paper-header-panel mode="standard">
+
+            <paper-material>
+                <paper-toolbar> <h1>Chip-in calculator</h1> </paper-toolbar>
+                <h2>Please add contributors</h2>
+                <cic-contributors contributors='{{contributors}}'></cic-contributors>
+                <cic-add-contributor></cic-add-contributor>
+            </paper-material>
+
+        </paper-header-panel>
+    </template>
+    <script>
+        var contributors = [{"name":"Name", "money":0}];
+        /*Polymer({
+            contributors: [{"name":"Name", "money":0}]
+        });*/
+    </script>
+
+</body>
+</html>
