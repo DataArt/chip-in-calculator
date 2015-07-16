@@ -10,7 +10,7 @@
 
         <h3>Contributors:</h3>
 
-        <template is="dom-repeat" items="{{_transformData(contributors)}}">
+        <template is="dom-repeat" items="{{contributors}}">
             <cic-contributor name="{{item.name}}" money="{{item.money}}"></cic-contributor>
         </template>
 
@@ -20,24 +20,24 @@
 
 <script>
     Polymer({
+
         is: "cic-contributors",
 
         properties: {
             contributors: {
                 type: Array,
-                value: function(){
-                    return []
-                }
+                value: function(){return []},
+                notify: true
             }
         },
 
-        ready: function(){
-            console.log(this.contributors);
-        },
+        observers: [
+            'propertiesChanged(contributors)'
+        ],
 
-        _transformData: function(d) {
-            console.log(d);
-            return d
+        propertiesChanged: function(contributors){
+            console.log(contributors)
         }
+
     });
 </script>

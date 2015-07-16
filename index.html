@@ -25,18 +25,27 @@
             <paper-material>
                 <paper-toolbar> <h1>Chip-in calculator</h1> </paper-toolbar>
                 <h2>Please add contributors</h2>
-                <cic-contributors contributors='{{contributors}}'></cic-contributors>
-                <cic-add-contributor></cic-add-contributor>
+                <cic-contributors contributors="{{contributors}}"></cic-contributors>
+                <cic-add-contributor on-clicked="addContributor"></cic-add-contributor>
             </paper-material>
 
         </paper-header-panel>
     </template>
-    <script>
-        var contributors = [{"name":"Name", "money":0}];
-        /*Polymer({
-            contributors: [{"name":"Name", "money":0}]
-        });*/
-    </script>
 
+    <script>
+        document.addEventListener('WebComponentsReady', function() {
+            var scope = document.querySelector('template[is="dom-bind"]'),
+                emptyContributor = {"name":"","money":0};
+            scope.contributors = [];
+
+            scope.addContributor = function(){
+                console.log(scope.contributors);
+                scope.contributors.push(emptyContributor)
+            };
+
+            scope.addContributor();
+        });
+    </script>
+    <script src="scripts/scripts.js"></script>
 </body>
 </html>

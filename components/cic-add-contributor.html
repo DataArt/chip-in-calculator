@@ -7,15 +7,21 @@
     <style></style>
 
     <template>
-        <paper-button raised>
-            Add new
-        </paper-button>
+        <paper-button raised id="add"> Add new </paper-button>
     </template>
 
 </dom-module>
 
 <script>
     Polymer({
-        is: "cic-add-contributor"
+        is: "cic-add-contributor",
+
+        listeners: {
+            "add.click": "clicked"
+        },
+
+        clicked: function(e){
+            this.fire('clicked')
+        }
     });
 </script>

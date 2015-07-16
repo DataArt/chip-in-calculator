@@ -4,6 +4,7 @@
   "description": "chip in calculator",
   "main": "index.js",
   "scripts": {
+    "postinstall": "bower update",
     "test": "gulp test"
   },
   "repository": {
