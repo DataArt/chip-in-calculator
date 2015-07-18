@@ -1,7 +1,6 @@
 <link rel="import" href="../bower_components/polymer/polymer.html">
-<link rel="import" href="cic-add-contributor.html">
 <link rel="import" href="cic-contributors.html">
-<link rel="import" href="cic-calculate.html">
+<link rel="import" href="../bower_components/paper-button/paper-button.html">
 
 <dom-module id="cic-main">
 
@@ -10,13 +9,22 @@
     <template>
 
         <!--<h2>Please add contributors</h2>-->
+
+        <div class="horizontal layout center-justified">
+            <paper-input error-message="Invalid input" label="Total money spent" value="{{totalValue}}"></paper-input>
+        </div>
         <div class="horizontal layout center-justified">
             <cic-contributors contributors="{{contributors}}"></cic-contributors>
         </div>
         <div class="horizontal layout center-justified">
-
-            <cic-add-contributor on-clicked="_addContributor"></cic-add-contributor>
-            <cic-calculate on-clicked="_calculate"></cic-calculate>
+            <paper-button raised id="add" on-click="_addContributor">
+                <iron-icon icon="add"></iron-icon>
+                Add New
+            </paper-button>
+            <paper-button raised id="done"  on-click="_calculate">
+                <iron-icon icon="done"></iron-icon>
+                Calculate
+            </paper-button>
         </div>
 
     </template>
@@ -34,6 +42,10 @@
             "contributors": {
                 type: Array,
                 value: function(){return []}
+            },
+            "totalValue": {
+                type: Number,
+                value: 0
             }
         },
 
@@ -46,7 +58,7 @@
         },
 
         _calculate: function(){
-
+            console.log(this.contributors, this.totalValue)
         },
 
         _emptyContributor: {"name":"","money":0}
