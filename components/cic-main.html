@@ -1,6 +1,7 @@
 <link rel="import" href="../bower_components/polymer/polymer.html">
-<link rel="import" href="cic-contributors.html">
 <link rel="import" href="../bower_components/paper-button/paper-button.html">
+<link rel="import" href="cic-contributors.html">
+<link rel="import" href="cic-result.html">
 
 <dom-module id="cic-main">
 
@@ -10,23 +11,33 @@
 
         <!--<h2>Please add contributors</h2>-->
 
-        <div class="horizontal layout center-justified">
-            <paper-input error-message="Invalid input" label="Total money spent" value="{{totalValue}}"></paper-input>
+        <div hidden="{{result.length}}">
+
+            <div class="horizontal layout center-justified">
+                <paper-input error-message="Invalid input" label="Total money spent" value="{{totalValue}}"></paper-input>
+            </div>
+
+            <div class="horizontal layout center-justified">
+                <cic-contributors contributors="{{contributors}}"></cic-contributors>
+            </div>
+
+            <div class="horizontal layout center-justified">
+                <paper-button raised id="add" on-click="_addContributor">
+                    <iron-icon icon="add"></iron-icon>
+                    Add New
+                </paper-button>
+                <paper-button raised id="done" on-click="calculate">
+                    <iron-icon icon="done"></iron-icon>
+                    Calculate
+                </paper-button>
+            </div>
+
         </div>
 
-        <div class="horizontal layout center-justified">
-            <cic-contributors contributors="{{contributors}}"></cic-contributors>
-        </div>
-
-        <div class="horizontal layout center-justified">
-            <paper-button raised id="add" on-click="_addContributor">
-                <iron-icon icon="add"></iron-icon>
-                Add New
-            </paper-button>
-            <paper-button raised id="done"  on-click="calculate">
-                <iron-icon icon="done"></iron-icon>
-                Calculate
-            </paper-button>
+        <div if="{{result.length}}">
+            <div class="horizontal layout center-justified">
+                <cic-result result="{{result}}"></cic-result>
+            </div>
         </div>
 
     </template>
@@ -34,7 +45,6 @@
 </dom-module>
 
 <script>
-
 
     Polymer({
 
@@ -52,18 +62,84 @@
         },
 
         ready: function(){
+            this.result = [];
             this.push('contributors', this.clone(this._emptyContributor));
         },
 
         calculate: function(){
+
+            this.contributors.forEach(function(d){
+                d.value = parseFloat(d.value);
+            });
+
+            var averagePayment = 0,
+                arr = [],
+                i = 0, j = 0,
+                totalValue = this.contributors.reduce(function(p,c){return p+ c.value}, 0);
+
             if (!this.totalValue) {
-                throw new Error('Total value is not set.');
+                alert('Total value is not set.');
+                //throw new Error('Total value is not set.');
             }
-            if (!this.contributors) {
-                throw new Error('Please add at least one contributor')
+            if (!this.contributors || this.contributors.length < 2) {
+                alert('Please add at least 2 contributors');
+                //throw new Error('Please add at least 2 contributors');
+            }
+            if (totalValue != this.totalValue) {
+                alert('Wrong contributions, thei should be equal to the total money spent');
+                //throw new Error('Wrong contributions, thei should be equal to the total money spent');
             }
 
-            console.log(this.contributors, this.totalValue)
+            averagePayment = this.totalValue/this.contributors.length;
+
+            arr = this.contributors.map(function(d){
+                d.value = averagePayment - d.value;
+                return d;
+            });
+
+            var debtors = arr.filter(function(item){return item.value >= 0}); // all positive
+            var lenders = arr.filter(function(item){return item.value < 0}); // all negative
+            var lender = lenders[0];
+            var debtor = debtors[0];
+            var logs = [];
+            var delta = 0;
+
+            while (lenders.length && lenders.length > 0) {
+                lender = lender || lenders[0];
+                debtor = debtor || debtors[0];
+                delta = debtor.value + lender.value;
+
+                if (delta < 0) {
+                    logs.push({
+                        from: debtor.name,
+                        to: lender.name,
+                        value: debtor.value
+                    });
+                    lender.value += debtor.value;
+                    debtor.value = 0;
+                } else if (delta >= 0) {
+                    logs.push({
+                        from: debtor.name,
+                        to: lender.name,
+                        value: -lender.value
+                    });
+                    debtor.value += lender.value;
+                    lender.value = 0;
+                }
+
+                if (debtor.value === 0) {
+                    debtors.splice(0, 1);
+                    debtor = null;
+                }
+                if (lender.value === 0) {
+                    lenders.splice(0, 1);
+                    lender = null;
+                }
+
+                delta = 0;
+            }
+
+            this.result = logs;
         },
 
         _addContributor: function(){
@@ -105,7 +181,7 @@
             throw new Error("Unable to copy obj! Its type isn't supported.");
         },
 
-        _emptyContributor: {"name":"","money":0}
+        _emptyContributor: {"name":"","value":0}
 
     });
 </script>

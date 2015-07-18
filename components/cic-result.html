@@ -1,0 +1,36 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/paper-item/paper-item.html">
+
+<dom-module id="cic-result">
+
+    <style></style>
+
+    <template>
+
+        <template is="dom-repeat" items="{{result}}">
+            <paper-item>
+                <paper-item-body>
+                    <b>{{item.from}}</b> should give <b>{{item.value}}</b> to <b>{{item.to}}</b>
+                </paper-item-body>
+            </paper-item>
+        </template>
+
+    </template>
+
+</dom-module>
+
+<script>
+    Polymer({
+
+        is: "cic-result",
+
+        properties: {
+            result: {
+                type: Array,
+                value: function(){return []},
+                notify: true
+            }
+        }
+
+    });
+</script>
