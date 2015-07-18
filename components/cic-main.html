@@ -1,0 +1,55 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="cic-add-contributor.html">
+<link rel="import" href="cic-contributors.html">
+<link rel="import" href="cic-calculate.html">
+
+<dom-module id="cic-main">
+
+    <style></style>
+
+    <template>
+
+        <!--<h2>Please add contributors</h2>-->
+        <div class="horizontal layout center-justified">
+            <cic-contributors contributors="{{contributors}}"></cic-contributors>
+        </div>
+        <div class="horizontal layout center-justified">
+
+            <cic-add-contributor on-clicked="_addContributor"></cic-add-contributor>
+            <cic-calculate on-clicked="_calculate"></cic-calculate>
+        </div>
+
+    </template>
+
+</dom-module>
+
+<script>
+
+
+    Polymer({
+
+        is: "cic-main",
+
+        properties: {
+            "contributors": {
+                type: Array,
+                value: function(){return []}
+            }
+        },
+
+        ready: function(){
+            this.contributors.push(this._emptyContributor);
+        },
+
+        _addContributor: function(){
+            this.push('contributors', this._emptyContributor);
+        },
+
+        _calculate: function(){
+
+        },
+
+        _emptyContributor: {"name":"","money":0}
+
+    });
+</script>

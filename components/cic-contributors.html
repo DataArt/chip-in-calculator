@@ -1,3 +1,4 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
 <link rel="import" href="../bower_components/paper-item/paper-item.html">
 <link rel="import" href="../bower_components/iron-ajax/iron-ajax.html">
 <link rel="import" href="cic-contributor.html">
@@ -8,7 +9,7 @@
 
     <template>
 
-        <h3>Contributors:</h3>
+        <!--<h3>Contributors:</h3>-->
 
         <template is="dom-repeat" items="{{contributors}}">
             <cic-contributor name="{{item.name}}" money="{{item.money}}"></cic-contributor>
@@ -26,17 +27,12 @@
         properties: {
             contributors: {
                 type: Array,
-                value: function(){return []},
-                notify: true
+                value: function(){return []}
             }
         },
 
-        observers: [
-            'propertiesChanged(contributors)'
-        ],
+        ready: function(){
 
-        propertiesChanged: function(contributors){
-            console.log(contributors)
         }
 
     });
