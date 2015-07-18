@@ -9,8 +9,6 @@
 
     <template>
 
-        <!--<h3>Contributors:</h3>-->
-
         <template is="dom-repeat" items="{{contributors}}">
             <cic-contributor name="{{item.name}}" money="{{item.money}}"></cic-contributor>
         </template>
@@ -27,7 +25,8 @@
         properties: {
             contributors: {
                 type: Array,
-                value: function(){return []}
+                value: function(){return []},
+                notify: true
             }
         },
 

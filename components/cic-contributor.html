@@ -9,7 +9,8 @@
         :host {
             display: block;
         }
-        :host paper-input {
+        :host paper-input,
+        :host paper-icon-button {
             display: inline-block;
         }
     </style>
@@ -18,7 +19,7 @@
 
         <paper-input error-message="Invalid input" label="Contributor's Name" value="{{name}}"></paper-input>
         <paper-input error-message="Invalid input" label="How much money spent" value="{{money}}"></paper-input>
-        <paper-icon-button icon="clear"></paper-icon-button>
+        <paper-icon-button icon="clear" on-click="destroy"></paper-icon-button>
 
     </template>
 
@@ -39,6 +40,11 @@
                 value: 0,
                 notify: true
             }
+        },
+
+        destroy: function(){
+            // todo: remove an element from DOM
+            // and remove an item from the contributors array
         }
     });
 </script>

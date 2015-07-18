@@ -13,15 +13,17 @@
         <div class="horizontal layout center-justified">
             <paper-input error-message="Invalid input" label="Total money spent" value="{{totalValue}}"></paper-input>
         </div>
+
         <div class="horizontal layout center-justified">
             <cic-contributors contributors="{{contributors}}"></cic-contributors>
         </div>
+
         <div class="horizontal layout center-justified">
             <paper-button raised id="add" on-click="_addContributor">
                 <iron-icon icon="add"></iron-icon>
                 Add New
             </paper-button>
-            <paper-button raised id="done"  on-click="_calculate">
+            <paper-button raised id="done"  on-click="calculate">
                 <iron-icon icon="done"></iron-icon>
                 Calculate
             </paper-button>
@@ -50,15 +52,57 @@
         },
 
         ready: function(){
-            this.contributors.push(this._emptyContributor);
+            this.push('contributors', this.clone(this._emptyContributor));
+        },
+
+        calculate: function(){
+            if (!this.totalValue) {
+                throw new Error('Total value is not set.');
+            }
+            if (!this.contributors) {
+                throw new Error('Please add at least one contributor')
+            }
+
+            console.log(this.contributors, this.totalValue)
         },
 
         _addContributor: function(){
-            this.push('contributors', this._emptyContributor);
+            this.push('contributors', this.clone(this._emptyContributor));
         },
 
-        _calculate: function(){
-            console.log(this.contributors, this.totalValue)
+        clone: function (obj) {
+            var copy = null,
+                _this = this;
+
+            // Handle the 3 simple types, and null or undefined
+            if (null == obj || "object" != typeof obj) return obj;
+
+            // Handle Date
+            if (obj instanceof Date) {
+                copy = new Date();
+                copy.setTime(obj.getTime());
+                return copy;
+            }
+
+            // Handle Array
+            if (obj instanceof Array) {
+                copy = [];
+                for (var i = 0, len = obj.length; i < len; i++) {
+                    copy[i] = _this.clone(obj[i]);
+                }
+                return copy;
+            }
+
+            // Handle Object
+            if (obj instanceof Object) {
+                copy = {};
+                for (var attr in obj) {
+                    if (obj.hasOwnProperty(attr)) copy[attr] = _this.clone(obj[attr]);
+                }
+                return copy;
+            }
+
+            throw new Error("Unable to copy obj! Its type isn't supported.");
         },
 
         _emptyContributor: {"name":"","money":0}
