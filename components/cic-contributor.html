@@ -16,8 +16,8 @@
     <template>
 
         <paper-input error-message="Invalid input" label="Contributor's Name" value="{{name}}"></paper-input>
-        <paper-input error-message="Invalid input" label="How much money spent" value="{{value}}"></paper-input>
-        <!--<paper-icon-button icon="clear" on-click="destroy"></paper-icon-button>-->
+        <paper-input error-message="Invalid input" label="Value" value="{{value}}"></paper-input>
+        <paper-icon-button icon="clear" on-click="destroy"></paper-icon-button>
 
     </template>
 
@@ -37,12 +37,14 @@
                 type: Number,
                 value: 0,
                 notify: true
+            },
+            index: {
+                type: Number
             }
         },
 
         destroy: function(){
-            // todo: remove an element from DOM
-            // and remove an item from the contributors array
+            this.fire('destroy', this.index);
         }
     });
 </script>

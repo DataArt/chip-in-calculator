@@ -1,37 +1,30 @@
 <link rel="import" href="../bower_components/polymer/polymer.html">
 <link rel="import" href="../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../bower_components/paper-item/paper-item.html">
+<link rel="import" href="../bower_components/iron-icon/iron-icon.html">
+<link rel="import" href="../bower_components/iron-icons/iron-icons.html">
+
 <link rel="import" href="cic-contributors.html">
 <link rel="import" href="cic-result.html">
 
 <dom-module id="cic-main">
-
-    <style></style>
-
     <template>
 
-        <!--<h2>Please add contributors</h2>-->
+        <div class="horizontal layout center-justified">
+            <paper-item>
+                Total value: <b>{{totalValue}}</b>
+            </paper-item>
+        </div>
 
-        <div hidden="{{result.length}}">
+        <div class="horizontal layout center-justified">
+            <cic-contributors contributors="{{contributors}}"></cic-contributors>
+        </div>
 
-            <div class="horizontal layout center-justified">
-                <paper-input error-message="Invalid input" label="Total money spent" value="{{totalValue}}"></paper-input>
-            </div>
-
-            <div class="horizontal layout center-justified">
-                <cic-contributors contributors="{{contributors}}"></cic-contributors>
-            </div>
-
-            <div class="horizontal layout center-justified">
-                <paper-button raised id="add" on-click="_addContributor">
-                    <iron-icon icon="add"></iron-icon>
-                    Add New
-                </paper-button>
-                <paper-button raised id="done" on-click="calculate">
-                    <iron-icon icon="done"></iron-icon>
-                    Calculate
-                </paper-button>
-            </div>
-
+        <div class="horizontal layout center-justified">
+            <paper-button raised id="add" on-click="_addContributor">
+                <iron-icon icon="add"></iron-icon>
+                Add New
+            </paper-button>
         </div>
 
         <div if="{{result.length}}">
@@ -41,7 +34,6 @@
         </div>
 
     </template>
-
 </dom-module>
 
 <script>
@@ -61,38 +53,27 @@
             }
         },
 
+        observers: [
+            '_contributorsChanged(contributors.*)'
+        ],
+
         ready: function(){
             this.result = [];
-            this.push('contributors', this.clone(this._emptyContributor));
+            this.push('contributors', this._clone(this._emptyContributor));
         },
 
         calculate: function(){
 
-            this.contributors.forEach(function(d){
-                d.value = parseFloat(d.value);
-            });
+            var contributors = this._clone(this.contributors);
 
             var averagePayment = 0,
                 arr = [],
                 i = 0, j = 0,
-                totalValue = this.contributors.reduce(function(p,c){return p+ c.value}, 0);
+                totalValue = contributors.reduce(function(p,c){return p+ c.value}, 0);
 
-            if (!this.totalValue) {
-                alert('Total value is not set.');
-                //throw new Error('Total value is not set.');
-            }
-            if (!this.contributors || this.contributors.length < 2) {
-                alert('Please add at least 2 contributors');
-                //throw new Error('Please add at least 2 contributors');
-            }
-            if (totalValue != this.totalValue) {
-                alert('Wrong contributions, thei should be equal to the total money spent');
-                //throw new Error('Wrong contributions, thei should be equal to the total money spent');
-            }
+            averagePayment = this.totalValue/contributors.length;
 
-            averagePayment = this.totalValue/this.contributors.length;
-
-            arr = this.contributors.map(function(d){
+            arr = contributors.map(function(d){
                 d.value = averagePayment - d.value;
                 return d;
             });
@@ -104,7 +85,7 @@
             var logs = [];
             var delta = 0;
 
-            while (lenders.length && lenders.length > 0) {
+            while (lenders.length > 0 && debtors.length > 0) {
                 lender = lender || lenders[0];
                 debtor = debtor || debtors[0];
                 delta = debtor.value + lender.value;
@@ -117,7 +98,7 @@
                     });
                     lender.value += debtor.value;
                     debtor.value = 0;
-                } else if (delta >= 0) {
+                } else {
                     logs.push({
                         from: debtor.name,
                         to: lender.name,
@@ -142,11 +123,7 @@
             this.result = logs;
         },
 
-        _addContributor: function(){
-            this.push('contributors', this.clone(this._emptyContributor));
-        },
-
-        clone: function (obj) {
+        _clone: function (obj) {
             var copy = null,
                 _this = this;
 
@@ -164,7 +141,7 @@
             if (obj instanceof Array) {
                 copy = [];
                 for (var i = 0, len = obj.length; i < len; i++) {
-                    copy[i] = _this.clone(obj[i]);
+                    copy[i] = _this._clone(obj[i]);
                 }
                 return copy;
             }
@@ -173,12 +150,34 @@
             if (obj instanceof Object) {
                 copy = {};
                 for (var attr in obj) {
-                    if (obj.hasOwnProperty(attr)) copy[attr] = _this.clone(obj[attr]);
+                    if (obj.hasOwnProperty(attr)) copy[attr] = _this._clone(obj[attr]);
                 }
                 return copy;
             }
 
             throw new Error("Unable to copy obj! Its type isn't supported.");
+        },
+
+        _addContributor: function(){
+            this.push('contributors', this._clone(this._emptyContributor));
+        },
+
+        _contributorsChanged: function(){
+            var contributors = this.contributors;
+
+            contributors.forEach(function(d){
+                d.value = parseFloat(d.value) || 0;
+            });
+
+            this.totalValue = contributors.reduce(function(p,c){
+                return p + c.value
+            }, 0);
+
+            if (this.totalValue > 0 && contributors.length > 1) {
+                this.calculate();
+            } else {
+                this.result = [];
+            }
         },
 
         _emptyContributor: {"name":"","value":0}

@@ -2,17 +2,18 @@
 <link rel="import" href="cic-contributor.html">
 
 <dom-module id="cic-contributors">
-
-    <style></style>
-
     <template>
 
         <template is="dom-repeat" items="{{contributors}}">
-            <cic-contributor name="{{item.name}}" value="{{item.value}}"></cic-contributor>
+            <cic-contributor
+                    name="{{item.name}}"
+                    value="{{item.value}}"
+                    index="{{index}}"
+                    on-destroy="destroy">
+            </cic-contributor>
         </template>
 
     </template>
-
 </dom-module>
 
 <script>
@@ -26,6 +27,11 @@
                 value: function(){return []},
                 notify: true
             }
+        },
+
+        destroy: function(e){
+            var index = e.detail;
+            this.splice('contributors', index, 1);
         }
 
     });

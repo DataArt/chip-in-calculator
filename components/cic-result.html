@@ -10,7 +10,7 @@
         <template is="dom-repeat" items="{{result}}">
             <paper-item>
                 <paper-item-body>
-                    <b>{{item.from}}</b> should give <b>{{item.value}}</b> to <b>{{item.to}}</b>
+                    <b>{{_getName(item.from)}}</b> should give <b>{{item.value}}</b> to <b>{{{{_getName(item.to)}}}}</b>
                 </paper-item-body>
             </paper-item>
         </template>
@@ -30,6 +30,10 @@
                 value: function(){return []},
                 notify: true
             }
+        },
+
+        _getName: function(name){
+            return name || 'Somebody';
         }
 
     });
