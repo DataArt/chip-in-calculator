@@ -2,11 +2,7 @@
 <link rel="import" href="../bower_components/paper-item/paper-item.html">
 
 <dom-module id="cic-result">
-
-    <style></style>
-
     <template>
-
         <template is="dom-repeat" items="{{result}}">
             <paper-item>
                 <paper-item-body>
@@ -14,16 +10,12 @@
                 </paper-item-body>
             </paper-item>
         </template>
-
     </template>
-
 </dom-module>
 
 <script>
     Polymer({
-
         is: "cic-result",
-
         properties: {
             result: {
                 type: Array,
@@ -31,10 +23,6 @@
                 notify: true
             }
         },
-
-        _getName: function(name){
-            return name || 'Somebody';
-        }
-
+        _getName: function(name){ return name || 'Somebody' }
     });
 </script>

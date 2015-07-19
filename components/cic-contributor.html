@@ -2,31 +2,21 @@
 <link rel="import" href="../bower_components/paper-input/paper-input.html">
 
 <dom-module id="cic-contributor">
-
     <style>
-        :host {
-            display: block;
-        }
+        :host {display: block}
         :host paper-input,
-        :host paper-icon-button {
-            display: inline-block;
-        }
+        :host paper-icon-button {display: inline-block}
     </style>
-
     <template>
-
         <paper-input error-message="Invalid input" label="Contributor's Name" value="{{name}}"></paper-input>
         <paper-input error-message="Invalid input" label="Value" value="{{value}}"></paper-input>
         <paper-icon-button icon="clear" on-click="destroy"></paper-icon-button>
-
     </template>
-
 </dom-module>
 
 <script>
     Polymer({
         is: "cic-contributor",
-
         properties: {
             name: {
                 type: String,
@@ -38,13 +28,8 @@
                 value: 0,
                 notify: true
             },
-            index: {
-                type: Number
-            }
+            index: { type: Number }
         },
-
-        destroy: function(){
-            this.fire('destroy', this.index);
-        }
+        destroy: function(){ this.fire('destroy', this.index) }
     });
 </script>

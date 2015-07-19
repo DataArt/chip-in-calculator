@@ -3,24 +3,20 @@
 
 <dom-module id="cic-contributors">
     <template>
-
         <template is="dom-repeat" items="{{contributors}}">
             <cic-contributor
-                    name="{{item.name}}"
-                    value="{{item.value}}"
-                    index="{{index}}"
-                    on-destroy="destroy">
+                name="{{item.name}}"
+                value="{{item.value}}"
+                index="{{index}}"
+                on-destroy="destroy">
             </cic-contributor>
         </template>
-
     </template>
 </dom-module>
 
 <script>
     Polymer({
-
         is: "cic-contributors",
-
         properties: {
             contributors: {
                 type: Array,
@@ -28,11 +24,9 @@
                 notify: true
             }
         },
-
         destroy: function(e){
             var index = e.detail;
             this.splice('contributors', index, 1);
         }
-
     });
 </script>
