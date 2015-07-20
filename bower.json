@@ -29,6 +29,7 @@
     "paper-styles": "PolymerElements/paper-styles#~1.0.9",
     "paper-elements": "PolymerElements/paper-elements#~1.0.1",
     "iron-elements": "PolymerElements/iron-elements#~1.0.2",
-    "polymer-themes": "~1.0.1"
+    "polymer-themes": "~1.0.1",
+    "paper-dialog": "PolymerElements/paper-dialog#~1.0.1"
   }
 }

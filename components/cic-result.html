@@ -1,29 +1,65 @@
 <link rel="import" href="../bower_components/polymer/polymer.html">
 <link rel="import" href="../bower_components/paper-item/paper-item.html">
+<link rel="import" href="../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../bower_components/paper-dialog/paper-dialog.html">
+<link rel="import" href="../bower_components/paper-dialog-scrollable/paper-dialog-scrollable.html">
 
 <dom-module id="cic-result">
+    <style>
+        :host paper-dialog {
+            height: 100%;
+            width: 100%;
+            background: white !important;
+        }
+    </style>
     <template>
-        <template is="dom-repeat" items="{{result}}">
-            <paper-item>
-                <paper-item-body>
-                    <b>{{_getName(item.from)}}</b> should give <b>{{_getValue(item.value)}}</b> to <b>{{{{_getName(item.to)}}}}</b>
-                </paper-item-body>
-            </paper-item>
-        </template>
+        <paper-dialog id="dialog">
+
+            <paper-dialog-scrollable>
+                <div class="horizontal layout center-justified">
+                    <paper-item> Total value: <strong>{{_getValue(result.totalValue)}}</strong> </paper-item>
+                    <paper-item> Average payment: <strong>{{_getValue(result.averagePayment)}}</strong> </paper-item>
+                </div>
+                <template is="dom-repeat" items="{{result.values}}">
+                    <div class="horizontal layout center-justified">
+                        <paper-item>
+                            <paper-item-body>
+                                <b>{{_getName(item.from)}}</b> should give <b>{{_getValue(item.value)}}</b> to <b>{{_getName(item.to)}}</b>
+                            </paper-item-body>
+                        </paper-item>
+                    </div>
+                </template>
+            </paper-dialog-scrollable>
+
+            <div class="horizontal layout center-justified">
+                <div class="buttons">
+                    <paper-item>
+                        <paper-button raised dialog-confirm autofocus>OK</paper-button>
+                    </paper-item>
+                </div>
+            </div>
+
+        </paper-dialog>
     </template>
 </dom-module>
 
 <script>
+
     Polymer({
         is: "cic-result",
         properties: {
             result: {
-                type: Array,
-                value: function(){return []},
+                type: Object,
+                value: function(){return {}},
                 notify: true
             }
         },
+        openDialog: function(){
+            this.$.dialog.open();
+        },
         _getName: function(name){ return name || 'Somebody' },
-        _getValue: function(value){ return value.toFixed(2); }
+        _getValue: function(value){
+            return value ? parseFloat(value).toFixed(2) : 0;
+        }
     });
 </script>
