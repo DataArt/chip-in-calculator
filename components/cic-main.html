@@ -18,9 +18,11 @@
             <cic-contributors contributors="{{contributors}}"></cic-contributors>
         </div>
         <div class="horizontal layout center-justified">
-            <paper-button raised id="add" on-click="_addContributor">
-                <iron-icon icon="add"></iron-icon> Add Contributor
-            </paper-button>
+            <paper-item>
+                <paper-button raised id="add" on-click="_addContributor">
+                    <iron-icon icon="add"></iron-icon> Add Contributor
+                </paper-button>
+            </paper-item>
         </div>
         <div if="{{result.length}}">
             <div class="horizontal layout center-justified">
