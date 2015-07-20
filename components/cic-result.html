@@ -18,6 +18,8 @@
             <paper-dialog-scrollable>
                 <div class="horizontal layout center-justified">
                     <paper-item> Total value: <strong>{{_getValue(result.totalValue)}}</strong> </paper-item>
+                </div>
+                <div class="horizontal layout center-justified">
                     <paper-item> Average payment: <strong>{{_getValue(result.averagePayment)}}</strong> </paper-item>
                 </div>
                 <template is="dom-repeat" items="{{result.values}}">
