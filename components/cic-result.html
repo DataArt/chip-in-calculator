@@ -6,7 +6,7 @@
         <template is="dom-repeat" items="{{result}}">
             <paper-item>
                 <paper-item-body>
-                    <b>{{_getName(item.from)}}</b> should give <b>{{item.value}}</b> to <b>{{{{_getName(item.to)}}}}</b>
+                    <b>{{_getName(item.from)}}</b> should give <b>{{_getValue(item.value)}}</b> to <b>{{{{_getName(item.to)}}}}</b>
                 </paper-item-body>
             </paper-item>
         </template>
@@ -23,6 +23,7 @@
                 notify: true
             }
         },
-        _getName: function(name){ return name || 'Somebody' }
+        _getName: function(name){ return name || 'Somebody' },
+        _getValue: function(value){ return value.toFixed(2); }
     });
 </script>

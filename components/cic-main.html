@@ -8,7 +8,9 @@
 
 <dom-module id="cic-main">
     <template>
-
+        <div class="horizontal layout center-justified">
+            <paper-item><h3>Chip in calculator</h3></paper-item>
+        </div>
         <div class="horizontal layout center-justified">
             <paper-item> Total value: <b>{{totalValue}}</b> </paper-item>
         </div>
@@ -17,7 +19,7 @@
         </div>
         <div class="horizontal layout center-justified">
             <paper-button raised id="add" on-click="_addContributor">
-                <iron-icon icon="add"></iron-icon> Add New
+                <iron-icon icon="add"></iron-icon> Add Contributor
             </paper-button>
         </div>
         <div if="{{result.length}}">
@@ -25,7 +27,6 @@
                 <cic-result result="{{result}}"></cic-result>
             </div>
         </div>
-
     </template>
 </dom-module>
 
