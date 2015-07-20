@@ -7,8 +7,9 @@
 <dom-module id="cic-result">
     <style>
         :host paper-dialog {
-            height: 95%;
-            width: 95%;
+            height: 100%;
+            width: 100%;
+            background: white !important;
         }
     </style>
     <template>
@@ -30,10 +31,12 @@
                 </template>
             </paper-dialog-scrollable>
 
-            <div class="buttons">
-                <paper-item>
-                    <paper-button raised dialog-confirm autofocus>OK</paper-button>
-                </paper-item>
+            <div class="horizontal layout center-justified">
+                <div class="buttons">
+                    <paper-item>
+                        <paper-button raised dialog-confirm autofocus>OK</paper-button>
+                    </paper-item>
+                </div>
             </div>
 
         </paper-dialog>
