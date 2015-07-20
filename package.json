@@ -25,5 +25,8 @@
   "bugs": {
     "url": "https://github.com/kashesandr/CIC/issues"
   },
-  "homepage": "https://github.com/kashesandr/CIC"
+  "homepage": "https://github.com/kashesandr/CIC",
+  "devDependencies": {
+    "gulp": "^3.9.0"
+  }
 }

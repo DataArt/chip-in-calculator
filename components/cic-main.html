@@ -5,28 +5,26 @@
 <link rel="import" href="../bower_components/iron-icons/iron-icons.html">
 <link rel="import" href="cic-contributors.html">
 <link rel="import" href="cic-result.html">
+<link rel="import" href="cic-share.html">
 
 <dom-module id="cic-main">
     <template>
+        <!-- todo: add help modal vindow -->
         <div class="horizontal layout center-justified">
-            <paper-item><h3>Chip in calculator</h3></paper-item>
-        </div>
-        <div class="horizontal layout center-justified">
-            <paper-item> Total value: <b>{{totalValue}}</b> </paper-item>
+            <cic-share></cic-share>
         </div>
         <div class="horizontal layout center-justified">
             <cic-contributors contributors="{{contributors}}"></cic-contributors>
         </div>
         <div class="horizontal layout center-justified">
             <paper-item>
+                <paper-button id="show-results" raised on-click="showResults" disabled>Show Results</paper-button>
                 <paper-button raised id="add" on-click="_addContributor">
-                    <iron-icon icon="add"></iron-icon> Add Contributor
+                    <iron-icon icon="add"></iron-icon> Contributor
                 </paper-button>
             </paper-item>
         </div>
-        <div class="horizontal layout center-justified">
-            <cic-result result="{{result}}"></cic-result>
-        </div>
+        <cic-result id="result" result="{{result}}"></cic-result>
     </template>
 </dom-module>
 
@@ -41,29 +39,40 @@
             "totalValue": {
                 type: Number,
                 value: 0
+            },
+            "averagePayment": {
+                type: Number,
+                value: 0
             }
         },
         observers: [
             '_contributorsChanged(contributors.*)'
         ],
         ready: function(){
-            this.result = [];
+            this.result = {};
             this.push('contributors', this._clone(this._emptyContributor));
-            this.showTotalValue = false;
+        },
+        showResults: function(){
+            if (this.totalValue > 0 && this.contributors.length > 1) {
+                this.calculate();
+                this.$.result.openDialog()
+            } else {
+                this.result = {};
+            }
         },
         calculate: function(){
 
+            var _this = this;
             var contributors = this._clone(this.contributors);
 
-            var averagePayment = 0,
-                arr = [],
+            var arr = [],
                 i = 0, j = 0,
                 totalValue = contributors.reduce(function(p,c){return p+ c.value}, 0);
 
-            averagePayment = this.totalValue/contributors.length;
+            this.averagePayment = this.totalValue/contributors.length;
 
             arr = contributors.map(function(d){
-                d.value = averagePayment - d.value;
+                d.value = _this.averagePayment - d.value;
                 return d;
             });
 
@@ -71,7 +80,7 @@
             var lenders = arr.filter(function(item){return item.value < 0}); // all negative
             var lender = lenders[0];
             var debtor = debtors[0];
-            var logs = [];
+            var values = [];
             var delta = 0;
 
             while (lenders.length > 0 && debtors.length > 0) {
@@ -80,7 +89,7 @@
                 delta = debtor.value + lender.value;
 
                 if (delta < 0) {
-                    logs.push({
+                    values.push({
                         from: debtor.name,
                         to: lender.name,
                         value: debtor.value
@@ -88,7 +97,7 @@
                     lender.value += debtor.value;
                     debtor.value = 0;
                 } else {
-                    logs.push({
+                    values.push({
                         from: debtor.name,
                         to: lender.name,
                         value: -lender.value
@@ -109,7 +118,11 @@
                 delta = 0;
             }
 
-            this.result = logs;
+            this.result = {
+                values: values,
+                totalValue: this.totalValue,
+                averagePayment: this.averagePayment
+            };
         },
         _clone: function (obj) {
             var copy = null,
@@ -159,13 +172,7 @@
                 return p + c.value
             }, 0);
 
-            // this.showTotalValue = this.totalValue > 0;
-
-            if (this.totalValue > 0 && contributors.length > 1) {
-                this.calculate();
-            } else {
-                this.result = [];
-            }
+            this.$['show-results'].disabled = contributors.length < 2
         },
         _emptyContributor: {"name":"","value":0}
     });

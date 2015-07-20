@@ -7,11 +7,15 @@
         :host paper-input,
         :host paper-icon-button {display: inline-block}
         :host .short {width: 4em}
+        :host .destroy {border-radius: 3px}
+        :host .destroy:hover {
+            background: rgba(255, 0, 0, .13);
+        }
     </style>
     <template>
         <paper-input error-message="Invalid input" label="Contributor's Name" value="{{name}}"></paper-input>
         <paper-input type="number" error-message="Invalid input" label="Value" value="{{value}}" class="short"></paper-input>
-        <paper-icon-button icon="clear" on-click="destroy"></paper-icon-button>
+        <paper-icon-button class="destroy" icon="clear" on-click="destroy"></paper-icon-button>
     </template>
 </dom-module>
 
