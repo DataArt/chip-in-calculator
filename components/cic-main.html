@@ -14,15 +14,15 @@
             <cic-share></cic-share>
         </div>
         <div class="horizontal layout center-justified">
-            <cic-contributors contributors="{{contributors}}"></cic-contributors>
-        </div>
-        <div class="horizontal layout center-justified">
             <paper-item>
                 <paper-button id="show-results" raised on-click="showResults" disabled>Show Results</paper-button>
                 <paper-button raised id="add" on-click="_addContributor">
                     <iron-icon icon="add"></iron-icon> Contributor
                 </paper-button>
             </paper-item>
+        </div>
+        <div class="horizontal layout center-justified">
+            <cic-contributors contributors="{{contributors}}"></cic-contributors>
         </div>
         <cic-result id="result" result="{{result}}"></cic-result>
     </template>
@@ -159,7 +159,7 @@
             throw new Error("Unable to copy obj! Its type isn't supported.");
         },
         _addContributor: function(){
-            this.push('contributors', this._clone(this._emptyContributor));
+            this.unshift('contributors', this._clone(this._emptyContributor));
         },
         _contributorsChanged: function(){
             var contributors = this.contributors;

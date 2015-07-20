@@ -8,7 +8,8 @@
                 name="{{item.name}}"
                 value="{{item.value}}"
                 index="{{index}}"
-                on-destroy="destroy">
+                on-destroy="destroy"
+                class="contributor">
             </cic-contributor>
         </template>
     </template>
@@ -33,6 +34,8 @@
         },
         _contributorsChanged: function(){
          // todo focus the last element
+            //var elements = Polymer.dom(this);
+            //console.log(elements);
         }
     });
 </script>
