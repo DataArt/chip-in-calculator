@@ -24,10 +24,8 @@
                 </paper-button>
             </paper-item>
         </div>
-        <div if="{{result.length}}">
-            <div class="horizontal layout center-justified">
-                <cic-result result="{{result}}"></cic-result>
-            </div>
+        <div class="horizontal layout center-justified">
+            <cic-result result="{{result}}"></cic-result>
         </div>
     </template>
 </dom-module>
@@ -51,6 +49,7 @@
         ready: function(){
             this.result = [];
             this.push('contributors', this._clone(this._emptyContributor));
+            this.showTotalValue = false;
         },
         calculate: function(){
 
@@ -159,6 +158,8 @@
             this.totalValue = contributors.reduce(function(p,c){
                 return p + c.value
             }, 0);
+
+            this.showTotalValue = this.totalValue > 0;
 
             if (this.totalValue > 0 && contributors.length > 1) {
                 this.calculate();
