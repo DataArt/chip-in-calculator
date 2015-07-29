@@ -27,6 +27,8 @@
   },
   "homepage": "https://github.com/kashesandr/CIC",
   "devDependencies": {
-    "gulp": "^3.9.0"
+    "gulp": "^3.9.0",
+    "through2": "^2.0.0",
+    "vulcanize": "^1.10.2"
   }
 }
