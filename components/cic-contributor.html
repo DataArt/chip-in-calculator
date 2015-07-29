@@ -7,14 +7,14 @@
         :host paper-input,
         :host paper-icon-button {display: inline-block}
         :host .short {width: 4em}
-        :host .destroy {border-radius: 3px}
+        :host .destroy {border-radius: 50%}
         :host .destroy:hover {
             background: rgba(255, 0, 0, .13);
         }
     </style>
     <template>
-        <paper-input autofocus error-message="Invalid input" label="Contributor's Name" value="{{name}}"></paper-input>
-        <paper-input type="number" error-message="Invalid input" label="Value" value="{{value}}" class="short"></paper-input>
+        <paper-input id="name" error-message="Invalid input" label="Contributor's Name" value="{{name}}"></paper-input>
+        <paper-input id="value" type="number" error-message="Invalid input" label="Value" value="{{value}}" class="short"></paper-input>
         <paper-icon-button class="destroy" icon="clear" on-click="destroy"></paper-icon-button>
     </template>
 </dom-module>
@@ -35,6 +35,13 @@
             },
             index: { type: Number }
         },
-        destroy: function(){ this.fire('destroy', this.index) }
+        destroy: function(){ this.fire('destroy', this.index) },
+        ready: function(){
+            // focus the name input when ready
+            var element = this.$$('#name').$$('input');
+            setTimeout(function(){
+                element.focus()
+            }, 0);
+        }
     });
 </script>

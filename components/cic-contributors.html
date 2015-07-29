@@ -1,8 +1,10 @@
 <link rel="import" href="../bower_components/polymer/polymer.html">
 <link rel="import" href="cic-contributor.html">
+<link rel="import" href="cic-utils.html">
 
 <dom-module id="cic-contributors">
     <template>
+        <cic-utils id="utils"></cic-utils>
         <template is="dom-repeat" items="{{contributors}}">
             <cic-contributor
                 name="{{item.name}}"
@@ -25,17 +27,13 @@
                 notify: true
             }
         },
-        observers: [
-            '_contributorsChanged(contributors.*)'
-        ],
         destroy: function(e){
             var index = e.detail;
             this.splice('contributors', index, 1);
         },
-        _contributorsChanged: function(){
-         // todo focus the last element
-            //var elements = Polymer.dom(this);
-            //console.log(elements);
-        }
+        add: function(){
+            this.push('contributors', this.$.utils.clone(this._emptyContributor));
+        },
+        _emptyContributor: {"name":"","value":0}
     });
 </script>

@@ -9,22 +9,22 @@
 
 <dom-module id="cic-main">
     <template>
-        <!-- todo: add help modal vindow -->
+        <cic-utils id="utils"></cic-utils>
         <div class="horizontal layout center-justified">
             <cic-share></cic-share>
         </div>
         <div class="horizontal layout center-justified">
             <paper-item>
                 <paper-button id="show-results" raised on-click="showResults" disabled>Show Results</paper-button>
-                <paper-button raised id="add" on-click="_addContributor">
+                <paper-button raised id="add" on-click="add">
                     <iron-icon icon="add"></iron-icon> Contributor
                 </paper-button>
             </paper-item>
         </div>
         <div class="horizontal layout center-justified">
-            <cic-contributors contributors="{{contributors}}"></cic-contributors>
+            <cic-contributors id="contributors" contributors="{{contributors}}"></cic-contributors>
         </div>
-        <cic-result id="result" result="{{result}}"></cic-result>
+        <cic-result id="result" result="[[result]]" class="fullbleed layout vertical"></cic-result>
     </template>
 </dom-module>
 
@@ -35,53 +35,47 @@
             "contributors": {
                 type: Array,
                 value: function(){return []}
-            },
-            "totalValue": {
-                type: Number,
-                value: 0
-            },
-            "averagePayment": {
-                type: Number,
-                value: 0
             }
         },
+        isReadyToCalculate: false,
         observers: [
             '_contributorsChanged(contributors.*)'
         ],
         ready: function(){
             this.result = {};
-            this.push('contributors', this._clone(this._emptyContributor));
+            this.add();
         },
         showResults: function(){
-            if (this.totalValue > 0 && this.contributors.length > 1) {
-                this.calculate();
-                this.$.result.openDialog()
-            } else {
-                this.result = {};
-            }
+            this.result = this._calculate( this.$.utils.clone(this.contributors) );
+            this.$.result.show()
         },
-        calculate: function(){
+        add: function(){
+            this.$.contributors.add()
+        },
+        _calculate: function(contributors){
+            if (!this.isReadyToCalculate)
+                return this.result = {};
 
-            var _this = this;
-            var contributors = this._clone(this.contributors);
+            var tmpArr = [],
+                totalValue = 0,
+                equalPayment = 0,
+                debtors= [], lenders= [],
+                lender = null, debtor = null,
+                values = [], delta = 0;
 
-            var arr = [],
-                i = 0, j = 0,
-                totalValue = contributors.reduce(function(p,c){return p+ c.value}, 0);
-
-            this.averagePayment = this.totalValue/contributors.length;
-
-            arr = contributors.map(function(d){
-                d.value = _this.averagePayment - d.value;
+            totalValue = contributors.reduce(function(p,c){return p+ c.value}, 0);
+            equalPayment = totalValue/contributors.length;
+            tmpArr = contributors.map(function(d){
+                d.value = equalPayment - d.value;
                 return d;
             });
 
-            var debtors = arr.filter(function(item){return item.value > 0}); // all positive
-            var lenders = arr.filter(function(item){return item.value < 0}); // all negative
-            var lender = lenders[0];
-            var debtor = debtors[0];
-            var values = [];
-            var delta = 0;
+            debtors = tmpArr.filter(function(item){return item.value > 0}); // all positive
+            lenders = tmpArr.filter(function(item){return item.value < 0}); // all negative
+            lender = lenders[0];
+            debtor = debtors[0];
+            values = [];
+            delta = 0;
 
             while (lenders.length > 0 && debtors.length > 0) {
                 lender = lender || lenders[0];
@@ -118,62 +112,21 @@
                 delta = 0;
             }
 
-            this.result = {
+             return {
                 values: values,
-                totalValue: this.totalValue,
-                averagePayment: this.averagePayment
+                totalValue: totalValue,
+                equalPayment: equalPayment
             };
         },
-        _clone: function (obj) {
-            var copy = null,
-                _this = this;
-
-            // Handle the 3 simple types, and null or undefined
-            if (null == obj || "object" != typeof obj) return obj;
-
-            // Handle Date
-            if (obj instanceof Date) {
-                copy = new Date();
-                copy.setTime(obj.getTime());
-                return copy;
-            }
-
-            // Handle Array
-            if (obj instanceof Array) {
-                copy = [];
-                for (var i = 0, len = obj.length; i < len; i++) {
-                    copy[i] = _this._clone(obj[i]);
-                }
-                return copy;
-            }
-
-            // Handle Object
-            if (obj instanceof Object) {
-                copy = {};
-                for (var attr in obj) {
-                    if (obj.hasOwnProperty(attr)) copy[attr] = _this._clone(obj[attr]);
-                }
-                return copy;
-            }
-
-            throw new Error("Unable to copy obj! Its type isn't supported.");
-        },
-        _addContributor: function(){
-            this.unshift('contributors', this._clone(this._emptyContributor));
+        _readyToCalculateResults: function(){
+            return this.contributors.length > 1
         },
         _contributorsChanged: function(){
-            var contributors = this.contributors;
-
-            contributors.forEach(function(d){
+            this.contributors.forEach(function(d){
                 d.value = parseFloat(d.value) || 0;
             });
-
-            this.totalValue = contributors.reduce(function(p,c){
-                return p + c.value
-            }, 0);
-
-            this.$['show-results'].disabled = contributors.length < 2
-        },
-        _emptyContributor: {"name":"","value":0}
+            this.isReadyToCalculate = this._readyToCalculateResults();
+            this.$['show-results'].disabled = !this.isReadyToCalculate;
+        }
     });
 </script>
