@@ -3,7 +3,7 @@ var gulp = require('gulp');
 var through = require('through2');
 var path = require('path');
 var runSequence = require('run-sequence').use(gulp);
-var clean = require('gulp-contrib-clean');
+var del = require('del');
 var crisper = require('gulp-crisper');
 var uglifyJs = require('gulp-uglify');
 var uglifyHtml = require('gulp-minify-html');
@@ -26,18 +26,22 @@ var vulcanizeWrapper = function() {
     });
 };
 
-gulp.task('clean', function(){
-    return gulp.src('build')
-        .pipe(clean())
+gulp.task('clean', function(cb){
+    del([
+        'build/**/*'
+    ], cb)
 });
-
 gulp.task('vulcanize', function(){
     return gulp.src('src/index.html')
         .pipe(vulcanizeWrapper())
         .pipe(crisper())
         .pipe(gulp.dest('build'))
 });
-
+gulp.task('minify:css', function(){
+    return gulp.src('src/**/*.css')
+        .pipe(uglifyCss())
+        .pipe(gulp.dest('build'));
+});
 gulp.task('minify:js', function(){
     return gulp.src('build/**/*.js')
         .pipe(uglifyJs())
@@ -53,6 +57,7 @@ gulp.task('default', function() {
     return runSequence(
         'clean',
         'vulcanize',
+        //'minify:css',
         'minify:js',
         'minify:html'
     );

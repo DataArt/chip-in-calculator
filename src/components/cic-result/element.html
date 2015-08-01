@@ -5,15 +5,7 @@
 <link rel="import" href="../../../bower_components/paper-dialog-scrollable/paper-dialog-scrollable.html">
 
 <dom-module id="cic-result">
-    <style>
-        :host paper-dialog {
-            min-height: 100%;
-            min-width: 100%;
-            height: 100%;
-            width: 100%;
-            background: white !important;
-        }
-    </style>
+    <link rel="import" type="css" href="style.css">
     <template>
         <paper-dialog id="dialog">
 
@@ -45,23 +37,4 @@
     </template>
 </dom-module>
 
-<script>
-
-    Polymer({
-        is: "cic-result",
-        properties: {
-            result: {
-                type: Object,
-                value: function(){return {}},
-                notify: true
-            }
-        },
-        show: function(){
-            this.$.dialog.open();
-        },
-        _getName: function(name){ return name || 'Somebody' },
-        _getValue: function(value){
-            return value ? parseFloat(value).toFixed(2) : 0;
-        }
-    });
-</script>
+<script src="script.js"></script>

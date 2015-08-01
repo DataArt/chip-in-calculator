@@ -3,7 +3,7 @@
 <link rel="import" href="../../../bower_components/paper-input/paper-input.html">
 
 <dom-module id="cic-contributor">
-    <link rel="import" type="css" href="styles.css">
+    <link rel="import" type="css" href="style.css">
     <template>
         <paper-input id="name" error-message="Invalid input" label="Contributor's Name" value="{{name}}"></paper-input>
         <paper-input id="value" type="number" error-message="Invalid input" label="Value" value="{{value}}" class="short"></paper-input>
@@ -11,29 +11,4 @@
     </template>
 </dom-module>
 
-<script>
-    Polymer({
-        is: "cic-contributor",
-        properties: {
-            name: {
-                type: String,
-                value: 'Name',
-                notify: true
-            },
-            value: {
-                type: Number,
-                value: 0,
-                notify: true
-            },
-            index: { type: Number }
-        },
-        destroy: function(){ this.fire('destroy', this.index) },
-        ready: function(){
-            // focus the name input when ready
-            var element = this.$$('#name').$$('input');
-            setTimeout(function(){
-                element.focus()
-            }, 0);
-        }
-    });
-</script>
+<script src="script.js"></script>
