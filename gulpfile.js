@@ -2,12 +2,16 @@ var Vulcanize = require('vulcanize');
 var gulp = require('gulp');
 var through = require('through2');
 var path = require('path');
+var runSequence = require('run-sequence').use(gulp);
+var clean = require('gulp-contrib-clean');
+var crisper = require('gulp-crisper');
+var uglifyJs = require('gulp-uglify');
+var uglifyHtml = require('gulp-minify-html');
+var uglifyCss = require('gulp-minify-css');
 
 var vulcan = new Vulcanize({
-    excludes: [],
-    stripExcludes: [],
-    inlineScripts: false,
-    inlineCss: false,
+    inlineScripts: true,
+    inlineCss: true,
     stripComments: true
 });
 
@@ -22,9 +26,35 @@ var vulcanizeWrapper = function() {
     });
 };
 
-gulp.task('default', function() {
-    gulp.src('src/index.html')
+gulp.task('clean', function(){
+    return gulp.src('build')
+        .pipe(clean())
+});
+
+gulp.task('vulcanize', function(){
+    return gulp.src('src/index.html')
         .pipe(vulcanizeWrapper())
+        .pipe(crisper())
         .pipe(gulp.dest('build'))
+});
+
+gulp.task('minify:js', function(){
+    return gulp.src('build/**/*.js')
+        .pipe(uglifyJs())
+        .pipe(gulp.dest('build'));
+});
+gulp.task('minify:html', function(){
+    return gulp.src('build/**/*.html')
+        .pipe(uglifyHtml())
+        .pipe(gulp.dest('build'));
+});
+
+gulp.task('default', function() {
+    return runSequence(
+        'clean',
+        'vulcanize',
+        'minify:js',
+        'minify:html'
+    );
 });
 

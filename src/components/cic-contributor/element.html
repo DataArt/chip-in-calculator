@@ -1,17 +1,9 @@
-<link rel="import" href="../../bower_components/paper-icon-button/paper-icon-button.html">
-<link rel="import" href="../../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../../bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../../../bower_components/paper-input/paper-input.html">
 
 <dom-module id="cic-contributor">
-    <style>
-        :host {display: block}
-        :host paper-input,
-        :host paper-icon-button {display: inline-block}
-        :host .short {width: 4em}
-        :host .destroy {border-radius: 50%}
-        :host .destroy:hover {
-            background: rgba(255, 0, 0, .13);
-        }
-    </style>
+    <link rel="import" type="css" href="styles.css">
     <template>
         <paper-input id="name" error-message="Invalid input" label="Contributor's Name" value="{{name}}"></paper-input>
         <paper-input id="value" type="number" error-message="Invalid input" label="Value" value="{{value}}" class="short"></paper-input>
