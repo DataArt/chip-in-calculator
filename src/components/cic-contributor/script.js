@@ -19,6 +19,6 @@ Polymer({
         var element = this.$$('#name').$$('input');
         setTimeout(function(){
             element.focus()
-        }, 0);
+        }, 500);
     }
 });
