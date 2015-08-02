@@ -11,18 +11,35 @@
 
             <paper-dialog-scrollable>
                 <div class="horizontal layout center-justified">
-                    <paper-item> Total value: <strong>{{_getValue(result.totalValue)}}</strong> </paper-item>
-                    <paper-item> Equal payment: <strong>{{_getValue(result.averagePayment)}}</strong> </paper-item>
+                    <paper-item>
+                        <strong>Total value</strong> = <strong>{{_getValue(result.totalValue)}}</strong>
+                    </paper-item>
                 </div>
-                <template is="dom-repeat" items="{{result.values}}">
-                    <div class="horizontal layout center-justified">
-                        <paper-item>
-                            <paper-item-body>
-                                <strong>{{_getName(item.from)}}</strong> gives <strong>{{_getValue(item.value)}}</strong> to <strong>{{_getName(item.to)}}</strong>
-                            </paper-item-body>
-                        </paper-item>
-                    </div>
-                </template>
+                <div class="horizontal layout center-justified">
+                    <paper-item>
+                        <strong>Equal payment</strong> = <strong>{{_getValue(result.equalPayment)}}</strong>
+                    </paper-item>
+                </div>
+                <div class="horizontal layout center-justified">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>From</th>
+                                <th>To</th>
+                                <th>$$$</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <template is="dom-repeat" items="{{result.values}}">
+                                <tr>
+                                    <td> {{_getName(item.from)}} </td>
+                                    <td> {{_getName(item.to)}} </td>
+                                    <td> {{_getValue(item.value)}} </td>
+                                </tr>
+                            </template>
+                        </tbody>
+                    </table>
+                </div>
             </paper-dialog-scrollable>
 
             <div class="horizontal layout center-justified">
