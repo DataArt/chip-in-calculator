@@ -5,25 +5,40 @@
 <link rel="import" href="../../../bower_components/iron-icons/iron-icons.html">
 <link rel="import" href="../cic-contributors/element.html">
 <link rel="import" href="../cic-result/element.html">
-<link rel="import" href="../cic-share/element.html">
+<!--<link rel="import" href="../cic-share/element.html">-->
 <link rel="import" href="../cic-analytics/element.html">
 
 <dom-module id="cic-main">
     <template>
         <cic-utils id="utils"></cic-utils>
+        <!--
         <div class="horizontal layout center-justified">
             <cic-share></cic-share>
         </div>
+        -->
         <div class="horizontal layout center-justified">
             <paper-item>
-                <paper-button id="show-results" raised on-click="showResults" disabled>Show Results</paper-button>
-                <paper-button raised id="add" on-click="add">
-                    <iron-icon icon="add"></iron-icon> Contributor
-                </paper-button>
+                <h1>Chip in calculator</h1>
             </paper-item>
         </div>
         <div class="horizontal layout center-justified">
             <cic-contributors id="contributors" contributors="{{contributors}}"></cic-contributors>
+        </div>
+        <div class="horizontal layout center-justified">
+            <paper-item>
+                <paper-button id="show-results" raised on-click="showResults" disabled>Show Result</paper-button>
+                <paper-button raised id="add" on-click="add">
+                    <iron-icon icon="add"></iron-icon>Contributor
+                </paper-button>
+            </paper-item>
+        </div>
+        <div class="horizontal layout center-justified">
+            <paper-item>
+                <a href="https://twitter.com/kashesandr">@kashesandr</a>
+            </paper-item>
+            <paper-item>
+                <a href="https://github.com/kashesandr/CIC">project on GitHub</a>
+            </paper-item>
         </div>
         <cic-result id="result" result="[[result]]" class="fullbleed layout vertical"></cic-result>
         <cic-analytics></cic-analytics>
