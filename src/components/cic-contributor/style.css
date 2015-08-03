@@ -2,7 +2,3 @@
 :host paper-input,
 :host paper-icon-button {display: inline-block}
 :host .short {width: 4em}
-:host .destroy {border-radius: 50%}
-:host .destroy:hover {
-    background: rgba(255, 0, 0, .13);
-}

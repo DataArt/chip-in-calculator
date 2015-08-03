@@ -1929,131 +1929,17 @@
 :host paper-input,
 :host paper-icon-button {display: inline-block}
 :host .short {width: 4em}
-:host .destroy {border-radius: 50%}
-:host .destroy:hover {
-    background: rgba(255, 0, 0, .13);
+</style><template><paper-input id=name type=text error-message="Only text" label="Contributor's Name" value={{name}}></paper-input><paper-input id=value type=number error-message="Only numbers" label=Value value={{value}} class=short on-keypress=_onKeyPress></paper-input><paper-icon-button class=destroy icon=clear on-click=destroy></paper-icon-button></template></dom-module><dom-module id=cic-utils assetpath="components/cic-utils/"><template></template></dom-module><dom-module id=cic-contributors assetpath="components/cic-contributors/"><template><cic-utils id=utils></cic-utils><template is=dom-repeat items={{contributors}}><cic-contributor name={{item.name}} value={{item.value}} index={{index}} on-destroy=destroy on-enter-press=add class=contributor></cic-contributor></template></template></dom-module><dom-module id=cic-result assetpath="components/cic-result/"><template><div class="horizontal layout center-justified"><paper-item>Total&nbsp;=&nbsp;<span>{{_getValue(result.totalValue,1)}}</span></paper-item><paper-item>Payment&nbsp;=&nbsp;<span>{{_getValue(result.equalPayment,1)}}</span></paper-item></div><template is=dom-repeat items=[[result.values]]><div class="horizontal layout center-justified"><paper-item><strong>[[_getName(item.from)]]</strong>&nbsp;gives&nbsp;<strong>[[_getValue(item.value)]]</strong>&nbsp;to&nbsp;<strong>[[_getName(item.to)]]</strong></paper-item></div></template><div class="horizontal layout center-justified"><paper-item>SCREENSHOT @ SEND</paper-item></div><div class="horizontal layout center-justified"><paper-item><paper-button raised autofocus on-click=hide>OK</paper-button></paper-item></div></template></dom-module><dom-module id=cic-analytics assetpath="components/cic-analytics/"><template><paper-item><img src=https://mc.yandex.ru/watch/31513143 style="position:absolute; left:-9999px;"></paper-item></template></dom-module><dom-module id=cic-main assetpath="components/cic-main/"><style>
+:host small paper-item {
+    font-size: 1em;
+    min-height: 1em;
 }
-</style><template><paper-input id=name error-message="Invalid input" label="Contributor's Name" value={{name}}></paper-input><paper-input id=value type=number error-message="Invalid input" label=Value value={{value}} class=short></paper-input><paper-icon-button class=destroy icon=clear on-click=destroy></paper-icon-button></template></dom-module><dom-module id=cic-utils assetpath="components/cic-utils/"><template></template></dom-module><dom-module id=cic-contributors assetpath="components/cic-contributors/"><template><cic-utils id=utils></cic-utils><template is=dom-repeat items={{contributors}}><cic-contributor name={{item.name}} value={{item.value}} index={{index}} on-destroy=destroy class=contributor></cic-contributor></template></template></dom-module><dom-module id=iron-overlay-backdrop assetpath="../bower_components/iron-overlay-behavior/"><style>
-
-    :host {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      background-color: var(--iron-overlay-backdrop-background-color, #000);
-      opacity: 0;
-      transition: opacity 0.2s;
-
-      @apply(--iron-overlay-backdrop);
-    }
-
-    :host([opened]) {
-      opacity: var(--iron-overlay-backdrop-opacity, 0.6);
-
-      @apply(--iron-overlay-backdrop-opened);
-    }
-
-  </style><template><content></content></template></dom-module><dom-module id=paper-dialog assetpath="../bower_components/paper-dialog/"><style>
-/*
-@license
-Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
-This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
-The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
-The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
-Code distributed by Google as part of the polymer project is also
-subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
-*/
-
-:host {
-  display: block;
-  margin: 24px 40px;
-
-  background: var(--paper-dialog-background-color, --primary-background-color);
-  color: var(--paper-dialog-color, --primary-text-color);
-
-  @apply(--layout-scroll);
-  @apply(--paper-font-body1);
-  @apply(--shadow-elevation-16dp);
-  @apply(--paper-dialog);
+:host a,
+:host a:link,
+:host a:visited,
+:host a:hover,
+:host a:active {
+    color: #a8a8a8
 }
 
-:host > ::content > * {
-  margin-top: 20px;
-  padding: 0 24px;
-}
-
-:host > ::content > .no-padding {
-  padding: 0;
-}
-
-:host > ::content > *:first-child {
-  margin-top: 24px;
-}
-
-:host > ::content > *:last-child {
-  margin-bottom: 24px;
-}
-
-:host > ::content h2 {
-  position: relative;
-  margin: 0;
-  @apply(--paper-font-title);
-
-  @apply(--paper-dialog-title);
-}
-
-:host > ::content .buttons {
-  position: relative;
-  padding: 8px 8px 8px 24px;
-  margin: 0;
-
-  color: var(--paper-dialog-button-color, --default-primary-color);
-
-  @apply(--layout-horizontal);
-  @apply(--layout-end-justified);
-}
-
-</style><template><content></content></template></dom-module><dom-module id=paper-dialog-scrollable assetpath="../bower_components/paper-dialog-scrollable/"><style>
-
-    :host {
-      display: block;
-      position: relative;
-    }
-
-    :host(.is-scrolled:not(:first-child))::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 1px;
-      background: var(--divider-color);
-    }
-
-    :host(.can-scroll:not(.scrolled-to-bottom):not(:last-child))::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      height: 1px;
-      background: var(--divider-color);
-    }
-
-    .scrollable {
-      padding: 0 24px;
-
-      @apply(--layout-scroll);
-
-      @apply(--paper-dialog-scrollable);
-    }
-  </style><template><div id=scrollable class=scrollable><content></content></div></template></dom-module><dom-module id=cic-result assetpath="components/cic-result/"><style>
-:host paper-dialog {
-    min-height: 100%;
-    min-width: 100%;
-    height: 100%;
-    width: 100%;
-    background: white !important;
-}
-</style><template><paper-dialog id=dialog><div class="horizontal layout center-justified"><paper-dialog-scrollable><div class="horizontal layout center-justified"><paper-item><strong>Total value</strong> = <strong>{{_getValue(result.totalValue)}}</strong></paper-item></div><div class="horizontal layout center-justified"><paper-item><strong>Equal payment</strong> = <strong>{{_getValue(result.equalPayment)}}</strong></paper-item></div><template is=dom-repeat items={{result.values}}><div class="horizontal layout center-justified"><paper-item><b>{{_getName(item.from)}}</b> &nbsp; gives &nbsp; <b>{{_getValue(item.value)}}</b> &nbsp; to &nbsp; <b>{{_getName(item.to)}}</b></paper-item></div></template></paper-dialog-scrollable></div><div class="horizontal layout center-justified"><paper-item><paper-button raised dialog-confirm autofocus>OK</paper-button></paper-item></div></paper-dialog></template></dom-module><dom-module id=cic-analytics assetpath="components/cic-analytics/"><template><paper-item><img src=https://mc.yandex.ru/watch/31513143 style="position:absolute; left:-9999px;"></paper-item></template></dom-module><dom-module id=cic-main assetpath="components/cic-main/"><template><cic-utils id=utils></cic-utils><div class="horizontal layout center-justified"><paper-item><h1>Chip in calculator</h1></paper-item></div><div class="horizontal layout center-justified"><cic-contributors id=contributors contributors={{contributors}}></cic-contributors></div><div class="horizontal layout center-justified"><paper-item><paper-button id=show-results raised on-click=showResults disabled>Show Result</paper-button><paper-button raised id=add on-click=add><iron-icon icon=add></iron-icon>Contributor</paper-button></paper-item></div><div class="horizontal layout center-justified"><paper-item><a href=https://twitter.com/kashesandr>@kashesandr</a></paper-item><paper-item><a href=https://github.com/kashesandr/CIC>project on GitHub</a></paper-item></div><cic-result id=result result=[[result]] class="fullbleed layout vertical"></cic-result><cic-analytics></cic-analytics></template></dom-module></div><cic-main></cic-main><script src=index.js></script></body></html>
+</style><template><div hidden={{isResultsShown}}><div class="horizontal layout center-justified"><paper-item>Chip in calculator</paper-item></div><div class="horizontal layout center-justified"><small><paper-item>Please add people and how much they chipped in</paper-item></small></div><div class="horizontal layout center-justified"><paper-item><cic-contributors id=contributors contributors={{contributors}}></cic-contributors></paper-item></div><div class="horizontal layout center-justified"><paper-item><paper-button id=show-results raised on-click=showResults disabled>Show Result</paper-button><paper-button raised id=add on-click=add><iron-icon icon=add></iron-icon>Contributor</paper-button></paper-item></div><br><template is=dom-if if={{isReadyToCalculate}}><div class="horizontal layout center-justified"><paper-item>SCREENSHOT @ SEND to people above</paper-item></div></template><div class="horizontal layout center-justified"><small><paper-item><a href=https://twitter.com/kashesandr>@kashesandr</a></paper-item></small> <small><paper-item><a href=https://github.com/kashesandr/CIC>project on GitHub</a></paper-item></small></div></div><template is=dom-if if={{isResultsShown}}><cic-result id=result result=[[result]] on-hidden=hideResults></cic-result></template><cic-utils id=utils></cic-utils><cic-analytics></cic-analytics></template></dom-module></div><cic-main></cic-main><script src=index.js></script></body></html>

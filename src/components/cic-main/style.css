@@ -1,0 +1,11 @@
+:host small paper-item {
+    font-size: 1em;
+    min-height: 1em;
+}
+:host a,
+:host a:link,
+:host a:visited,
+:host a:hover,
+:host a:active {
+    color: #a8a8a8
+}

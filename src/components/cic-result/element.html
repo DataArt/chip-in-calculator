@@ -1,40 +1,34 @@
 <link rel="import" href="../../../bower_components/polymer/polymer.html">
 <link rel="import" href="../../../bower_components/paper-item/paper-item.html">
 <link rel="import" href="../../../bower_components/paper-button/paper-button.html">
-<link rel="import" href="../../../bower_components/paper-dialog/paper-dialog.html">
-<link rel="import" href="../../../bower_components/paper-dialog-scrollable/paper-dialog-scrollable.html">
 
 <dom-module id="cic-result">
-    <link rel="import" type="css" href="style.css">
     <template>
-        <paper-dialog id="dialog">
-            <div class="horizontal layout center-justified">
-                <paper-dialog-scrollable>
-                    <div class="horizontal layout center-justified">
-                        <paper-item>
-                            <strong>Total value</strong> = <strong>{{_getValue(result.totalValue)}}</strong>
-                        </paper-item>
-                    </div>
-                    <div class="horizontal layout center-justified">
-                        <paper-item>
-                            <strong>Equal payment</strong> = <strong>{{_getValue(result.equalPayment)}}</strong>
-                        </paper-item>
-                    </div>
-                    <template is="dom-repeat" items="{{result.values}}">
-                        <div class="horizontal layout center-justified">
-                            <paper-item>
-                                <b>{{_getName(item.from)}}</b> &nbsp; gives &nbsp; <b>{{_getValue(item.value)}}</b> &nbsp; to &nbsp; <b>{{_getName(item.to)}}</b>
-                            </paper-item>
-                        </div>
-                    </template>
-                </paper-dialog-scrollable>
-            </div>
+        <div class="horizontal layout center-justified">
+            <paper-item>
+                Total&nbsp;=&nbsp;<span>{{_getValue(result.totalValue,1)}}</span>
+            </paper-item>
+            <paper-item>
+                Payment&nbsp;=&nbsp;<span>{{_getValue(result.equalPayment,1)}}</span>
+            </paper-item>
+        </div>
+        <template is="dom-repeat" items="[[result.values]]">
             <div class="horizontal layout center-justified">
                 <paper-item>
-                    <paper-button raised dialog-confirm autofocus>OK</paper-button>
+                    <strong>[[_getName(item.from)]]</strong>&nbsp;gives&nbsp;<strong>[[_getValue(item.value)]]</strong>&nbsp;to&nbsp;<strong>[[_getName(item.to)]]</strong>
                 </paper-item>
             </div>
-        </paper-dialog>
+        </template>
+        <div class="horizontal layout center-justified">
+            <paper-item>
+                SCREENSHOT @ SEND
+            </paper-item>
+        </div>
+        <div class="horizontal layout center-justified">
+            <paper-item>
+                <paper-button raised autofocus on-click="hide">OK</paper-button>
+            </paper-item>
+        </div>
     </template>
 </dom-module>
 

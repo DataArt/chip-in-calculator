@@ -5,9 +5,27 @@
 <dom-module id="cic-contributor">
     <link rel="import" type="css" href="style.css">
     <template>
-        <paper-input id="name" error-message="Invalid input" label="Contributor's Name" value="{{name}}"></paper-input>
-        <paper-input id="value" type="number" error-message="Invalid input" label="Value" value="{{value}}" class="short"></paper-input>
-        <paper-icon-button class="destroy" icon="clear" on-click="destroy"></paper-icon-button>
+        <paper-input
+            id="name"
+            type="text"
+            error-message="Only text"
+            label="Contributor's Name"
+            value="{{name}}">
+        </paper-input>
+        <paper-input
+            id="value"
+            type="number"
+            error-message="Only numbers"
+            label="Value"
+            value="{{value}}"
+            class="short"
+            on-keypress="_onKeyPress">
+        </paper-input>
+        <paper-icon-button
+            class="destroy"
+            icon="clear"
+            on-click="destroy">
+        </paper-icon-button>
     </template>
 </dom-module>
 

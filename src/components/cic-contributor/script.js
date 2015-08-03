@@ -17,8 +17,12 @@ Polymer({
     ready: function(){
         // focus the name input when ready
         var element = this.$$('#name').$$('input');
-        setTimeout(function(){
+        window.setTimeout(function(){
             element.focus()
         }, 0);
+    },
+    _onKeyPress: function(e){
+        if(e.keyCode === 13)
+            this.fire('enter-press');
     }
 });

@@ -13,10 +13,16 @@ Polymer({
     ready: function(){
         this.result = {};
         this.add();
+        this.isResultsShown = false;
     },
     showResults: function(){
         this.result = this._calculate( this.$.utils.clone(this.contributors) );
-        this.$.result.show()
+        this.isResultsShown = true;
+        window.scrollTo(0, 0);
+    },
+    hideResults: function(){
+        this.result = {};
+        this.isResultsShown = false;
     },
     add: function(){
         this.$.contributors.add()
