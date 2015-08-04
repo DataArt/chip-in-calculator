@@ -16,13 +16,19 @@ Polymer({
     destroy: function(){ this.fire('destroy', this.index) },
     ready: function(){
         // focus the name input when ready
-        var element = this.$$('#name').$$('input');
+        this._focus( this.$$('#name').$$('input') );
+    },
+    _focus: function(element){
         window.setTimeout(function(){
             element.focus()
         }, 0);
     },
     _onKeyPress: function(e){
-        if(e.keyCode === 13)
-            this.fire('enter-press');
+        if (e.keyCode === 13)
+            // todo: clean up this
+            if (e.target.parentNode.parentNode.parentNode.id === 'value')
+                this.fire('enter-press');
+            else
+                this._focus( this.$$('#value').$$('input') );
     }
 });

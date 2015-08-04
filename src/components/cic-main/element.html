@@ -5,6 +5,7 @@
 <link rel="import" href="../../../bower_components/iron-icons/iron-icons.html">
 <link rel="import" href="../cic-contributors/element.html">
 <link rel="import" href="../cic-result/element.html">
+<link rel="import" href="../cic-donate/element.html">
 <link rel="import" href="../cic-analytics/element.html">
 
 <dom-module id="cic-main">
@@ -45,6 +46,9 @@
                     <a href="https://twitter.com/kashesandr">@kashesandr</a>
                 </paper-item></small>
                 <small><paper-item>
+                    <a href="javascript:;" on-click="_toggleDonation">donate</a>
+                </paper-item></small>
+                <small><paper-item>
                     <a href="https://github.com/kashesandr/CIC">project on GitHub</a>
                 </paper-item></small>
             </div>
@@ -52,7 +56,12 @@
         <template is="dom-if" if="{{isResultsShown}}">
             <cic-result id="result" result="[[result]]" on-hidden="hideResults"></cic-result>
         </template>
-
+        <br/>
+        <div class="horizontal layout center-justified">
+            <paper-item>
+                <cic-donate hidden="{{isDonateHidden}}"></cic-donate>
+            </paper-item>
+        </div>
         <cic-utils id="utils"></cic-utils>
         <cic-analytics></cic-analytics>
     </template>

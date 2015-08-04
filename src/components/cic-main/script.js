@@ -14,6 +14,7 @@ Polymer({
         this.result = {};
         this.add();
         this.isResultsShown = false;
+        this.isDonateHidden = true;
     },
     showResults: function(){
         this.result = this._calculate( this.$.utils.clone(this.contributors) );
@@ -102,5 +103,8 @@ Polymer({
         });
         this.isReadyToCalculate = this._readyToCalculateResults();
         this.$['show-results'].disabled = !this.isReadyToCalculate;
+    },
+    _toggleDonation: function(){
+        this.isDonateHidden = !this.isDonateHidden;
     }
 });
