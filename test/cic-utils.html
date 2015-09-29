@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1">
+
+    <script src="../bower_components/webcomponentsjs/webcomponents.min.js"></script>
+    <script src="../node_modules/web-component-tester/browser.js"></script>
+    <link rel="import" href="../src/components/cic-utils/element.html">
+
+</head>
+<body unresolved class="fullbleed layout vertical">
+
+    <cic-utils id="utils"></cic-utils>
+
+    <script>
+        test('utils.isNumeric', function(){
+            var utils = document.getElementById('utils');
+            [1,0,-1,1.83,-9.87].forEach(function(d){
+                assert.isTrue(utils.isNumeric(d));
+            });
+            [true, false,null, {}, 'a', new Date()].forEach(function(d){
+                assert.isFalse(utils.isNumeric(d));
+            });
+        });
+        test('utils.clone', function(){
+            [
+                {'b':2,'a':1,'c':3}, new Date(),
+                null, 'asd', 123123123123, 0.123, 0, -1
+            ].forEach(function(d){
+                assert.deepEqual(d, utils.clone(d))
+            });
+        });
+    </script>
+
+</body>
+</html>
