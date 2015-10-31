@@ -32,9 +32,13 @@ gulp.task('clean', function(cb){
     ], cb)
 });
 gulp.task('vulcanize', function(){
-    return gulp.src('src/index.html')
+    return gulp.src('src/components/cic-main/element.html')
         .pipe(vulcanizeWrapper())
         .pipe(crisper())
+        .pipe(gulp.dest('build/components/cic-main'))
+});
+gulp.task('copy', function(){
+    return gulp.src('src/index.html')
         .pipe(gulp.dest('build'))
 });
 gulp.task('minify:css', function(){
@@ -57,6 +61,7 @@ gulp.task('default', function() {
     return runSequence(
         'clean',
         'vulcanize',
+        'copy',
         //'minify:css',
         'minify:js',
         'minify:html'
