@@ -1,5 +1,7 @@
 Polymer({
+
     is: "cic-utils",
+
     clone: function (obj) {
         var copy = null,
             _this = this;
@@ -34,7 +36,26 @@ Polymer({
 
         throw new Error("Unable to copy obj! Its type isn't supported.");
     },
+
     isNumeric: function(n) {
         return !isNaN(parseFloat(n)) && isFinite(n);
+    },
+
+    // http://stackoverflow.com/questions/7718935
+    loadScript: function(src, callback) {
+        var s, r, t;
+        r = false;
+        s = document.createElement('script');
+        s.type = 'text/javascript';
+        s.src = src;
+        s.onload = s.onreadystatechange = function() {
+            if ( !r && (!this.readyState || this.readyState == 'complete') )
+            {
+                r = true;
+                callback();
+            }
+        };
+        t = document.getElementsByTagName('script')[0];
+        t.parentNode.insertBefore(s, t);
     }
 });

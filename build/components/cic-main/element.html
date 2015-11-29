@@ -1244,14 +1244,14 @@
 
     /* opacity for dark text on a light background */
     --dark-divider-opacity: 0.12;
-    --dark-disabled-opacity: 0.26; /* or hint text */
-    --dark-secondary-opacity: 0.54; /* or icon */
+    --dark-disabled-opacity: 0.38; /* or hint text or icon */
+    --dark-secondary-opacity: 0.54;
     --dark-primary-opacity: 0.87;
 
     /* opacity for light text on a dark background */
     --light-divider-opacity: 0.12;
-    --light-disabled-opacity: 0.3; /* or hint text */
-    --light-secondary-opacity: 0.7; /* or icon */
+    --light-disabled-opacity: 0.3; /* or hint text or icon */
+    --light-secondary-opacity: 0.7;
     --light-primary-opacity: 1.0;
 
   }
@@ -1318,8 +1318,7 @@
       /* @apply(--paper-font-common-base) */
       font-family: 'Roboto', 'Noto', sans-serif;
       -webkit-font-smoothing: antialiased;
-      /* @apply(--paper-font-common-expensive-kerning); */
-      text-rendering: optimizeLegibility;
+
       /* @apply(--paper-font-common-nowrap); */
       white-space: nowrap;
       overflow: hidden;
@@ -1335,8 +1334,7 @@
       /* @apply(--paper-font-common-base) */
       font-family: 'Roboto', 'Noto', sans-serif;
       -webkit-font-smoothing: antialiased;
-      /* @apply(--paper-font-common-expensive-kerning); */
-      text-rendering: optimizeLegibility;
+
       /* @apply(--paper-font-common-nowrap); */
       white-space: nowrap;
       overflow: hidden;
@@ -1352,8 +1350,7 @@
       /* @apply(--paper-font-common-base) */
       font-family: 'Roboto', 'Noto', sans-serif;
       -webkit-font-smoothing: antialiased;
-      /* @apply(--paper-font-common-expensive-kerning); */
-      text-rendering: optimizeLegibility;
+
 
       font-size: 45px;
       font-weight: 400;
@@ -1365,8 +1362,7 @@
       /* @apply(--paper-font-common-base) */
       font-family: 'Roboto', 'Noto', sans-serif;
       -webkit-font-smoothing: antialiased;
-      /* @apply(--paper-font-common-expensive-kerning); */
-      text-rendering: optimizeLegibility;
+
 
       font-size: 34px;
       font-weight: 400;
@@ -1378,8 +1374,7 @@
       /* @apply(--paper-font-common-base) */
       font-family: 'Roboto', 'Noto', sans-serif;
       -webkit-font-smoothing: antialiased;
-      /* @apply(--paper-font-common-expensive-kerning); */
-      text-rendering: optimizeLegibility;
+
 
       font-size: 24px;
       font-weight: 400;
@@ -1391,8 +1386,7 @@
       /* @apply(--paper-font-common-base) */
       font-family: 'Roboto', 'Noto', sans-serif;
       -webkit-font-smoothing: antialiased;
-      /* @apply(--paper-font-common-expensive-kerning); */
-      text-rendering: optimizeLegibility;
+
       /* @apply(--paper-font-common-nowrap); */
       white-space: nowrap;
       overflow: hidden;
@@ -1407,8 +1401,7 @@
       /* @apply(--paper-font-common-base) */
       font-family: 'Roboto', 'Noto', sans-serif;
       -webkit-font-smoothing: antialiased;
-      /* @apply(--paper-font-common-expensive-kerning); */
-      text-rendering: optimizeLegibility;
+
 
       font-size: 16px;
       font-weight: 400;
@@ -1454,8 +1447,7 @@
       /* @apply(--paper-font-common-base) */
       font-family: 'Roboto', 'Noto', sans-serif;
       -webkit-font-smoothing: antialiased;
-      /* @apply(--paper-font-common-expensive-kerning); */
-      text-rendering: optimizeLegibility;
+
       /* @apply(--paper-font-common-nowrap); */
       white-space: nowrap;
       overflow: hidden;
@@ -1470,8 +1462,7 @@
       /* @apply(--paper-font-common-base) */
       font-family: 'Roboto', 'Noto', sans-serif;
       -webkit-font-smoothing: antialiased;
-      /* @apply(--paper-font-common-expensive-kerning); */
-      text-rendering: optimizeLegibility;
+
       /* @apply(--paper-font-common-nowrap); */
       white-space: nowrap;
       overflow: hidden;
@@ -1721,215 +1712,261 @@
       cursor: auto;
       @apply(--paper-icon-button-disabled);
     }
-  </style><template><paper-ripple id=ink class=circle center></paper-ripple><iron-icon id=icon src=[[src]] icon=[[icon]] alt$=[[alt]]></iron-icon></template></dom-module><dom-module id=paper-input-container assetpath="../../../bower_components/paper-input/"><style>
+  </style><template><paper-ripple id=ink class=circle center></paper-ripple><iron-icon id=icon src=[[src]] icon=[[icon]] alt$=[[alt]]></iron-icon></template></dom-module><dom-module id=paper-input-char-counter assetpath="../../../bower_components/paper-input/"><template><style>
+      :host {
+        display: inline-block;
+        float: right;
 
-    :host {
-      display: block;
-      padding: 8px 0;
+        @apply(--paper-font-caption);
+        @apply(--paper-input-char-counter);
+      }
 
-      @apply(--paper-input-container);
-    }
+      :host-context([dir="rtl"]) {
+        float: left;
+      }
+    </style><span>[[_charCounterStr]]</span></template></dom-module><dom-module id=paper-input-container assetpath="../../../bower_components/paper-input/"><template><style>
+      :host {
+        display: block;
+        padding: 8px 0;
 
-    :host[inline] {
-      display: inline-block;
-    }
+        @apply(--paper-input-container);
+      }
 
-    :host([disabled]) {
-      pointer-events: none;
-      opacity: 0.33;
-    }
+      :host[inline] {
+        display: inline-block;
+      }
 
-    .floated-label-placeholder {
-      @apply(--paper-font-caption);
-    }
+      :host([disabled]) {
+        pointer-events: none;
+        opacity: 0.33;
 
-    .underline {
-      position: relative;
-    }
+        @apply(--paper-input-container-disabled);
+      }
 
-    .focused-line {
-      height: 2px;
+      .floated-label-placeholder {
+        @apply(--paper-font-caption);
+      }
 
-      -webkit-transform-origin: center center;
-      transform-origin: center center;
-      -webkit-transform: scale3d(0,1,1);
-      transform: scale3d(0,1,1);
+      .underline {
+        position: relative;
+      }
 
-      background: var(--paper-input-container-focus-color, --default-primary-color);
+      .focused-line {
+        height: 2px;
+        @apply(--layout-fit);
 
-      @apply(--paper-input-container-underline-focus);
-    }
+        -webkit-transform-origin: center center;
+        transform-origin: center center;
+        -webkit-transform: scale3d(0,1,1);
+        transform: scale3d(0,1,1);
 
-    .underline.is-highlighted .focused-line {
-      -webkit-transform: none;
-      transform: none;
-      -webkit-transition: -webkit-transform 0.25s;
-      transition: transform 0.25s;
+        background: var(--paper-input-container-focus-color, --default-primary-color);
 
-      @apply(--paper-transition-easing);
-    }
+        @apply(--paper-input-container-underline-focus);
+      }
 
-    .underline.is-invalid .focused-line {
-      background: var(--paper-input-container-invalid-color, --google-red-500);
+      .underline.is-highlighted .focused-line {
+        -webkit-transform: none;
+        transform: none;
+        -webkit-transition: -webkit-transform 0.25s;
+        transition: transform 0.25s;
 
-      -webkit-transform: none;
-      transform: none;
-      -webkit-transition: -webkit-transform 0.25s;
-      transition: transform 0.25s;
+        @apply(--paper-transition-easing);
+      }
 
-      @apply(--paper-transition-easing);
-    }
+      .underline.is-invalid .focused-line {
+        background: var(--paper-input-container-invalid-color, --google-red-500);
 
-    .unfocused-line {
-      height: 1px;
-      background: var(--paper-input-container-color, --secondary-text-color);
+        -webkit-transform: none;
+        transform: none;
+        -webkit-transition: -webkit-transform 0.25s;
+        transition: transform 0.25s;
 
-      @apply(--paper-input-container-underline);
-    }
+        @apply(--paper-transition-easing);
+      }
 
-    :host([disabled]) .unfocused-line {
-      border-bottom: 1px dashed;
-      border-color: var(--paper-input-container-color, --secondary-text-color);
-      background: transparent;
+      .unfocused-line {
+        height: 1px;
+        @apply(--layout-fit);
+        background: var(--paper-input-container-color, --secondary-text-color);
 
-      @apply(--paper-input-container-underline-disabled);
-    }
+        @apply(--paper-input-container-underline);
+      }
 
-    .input-content {
-      position: relative;
-    }
+      :host([disabled]) .unfocused-line {
+        border-bottom: 1px dashed;
+        border-color: var(--paper-input-container-color, --secondary-text-color);
+        background: transparent;
 
-    .input-content ::content label,
-    .input-content ::content .paper-input-label {
-      position: absolute;
-      top: 0;
-      right: 0;
-      left: 0;
-      font: inherit;
-      color: var(--paper-input-container-color, --secondary-text-color);
+        @apply(--paper-input-container-underline-disabled);
+      }
 
-      @apply(--paper-font-subhead);
-      @apply(--paper-input-container-label);
-    }
+      .label-and-input-container {
+        @apply(--layout-flex);
+        @apply(--layout-relative);
+      }
 
-    .input-content.label-is-floating ::content label,
-    .input-content.label-is-floating ::content .paper-input-label {
-      -webkit-transform: translate3d(0, -75%, 0) scale(0.75);
-      transform: translate3d(0, -75%, 0) scale(0.75);
-      -webkit-transform-origin: left top;
-      transform-origin: left top;
-      -webkit-transition: -webkit-transform 0.25s;
-      transition: transform 0.25s;
+      .input-content {
+        position: relative;
+        @apply(--layout-horizontal);
+        @apply(--layout-end);
+      }
 
-      @apply(--paper-transition-easing);
-    }
+      .input-content ::content label,
+      .input-content ::content .paper-input-label {
+        position: absolute;
+        top: 0;
+        right: 0;
+        left: 0;
+        font: inherit;
+        color: var(--paper-input-container-color, --secondary-text-color);
 
-    .input-content.label-is-highlighted ::content label,
-    .input-content.label-is-highlighted ::content .paper-input-label {
-      color: var(--paper-input-container-focus-color, --default-primary-color);
+        @apply(--paper-font-common-nowrap);
+        @apply(--paper-font-subhead);
+        @apply(--paper-input-container-label);
+      }
 
-      @apply(--paper-input-container-label-focus);
-    }
+      .input-content.label-is-floating ::content label,
+      .input-content.label-is-floating ::content .paper-input-label {
+        -webkit-transform: translateY(-75%) scale(0.75);
+        transform: translateY(-75%) scale(0.75);
+        -webkit-transition: -webkit-transform 0.25s;
+        transition: transform 0.25s;
 
-    .input-content.is-invalid ::content label,
-    .input-content.is-invalid ::content .paper-input-label {
-      color: var(--paper-input-container-invalid-color, --google-red-500);
-    }
+        -webkit-transform-origin: left top;
+        transform-origin: left top;
 
-    .input-content.label-is-hidden ::content label,
-    .input-content.label-is-hidden ::content .paper-input-label {
-      visibility: hidden;
-    }
+        /* Since we scale to 75/100 of the size, we actually have 100/75 of the
+        original space now available */
+        width: 133%;
 
-    .input-content ::content input,
-    .input-content ::content textarea,
-    .input-content ::content iron-autogrow-textarea,
-    .input-content ::content .paper-input-input {
-      position: relative; /* to make a stacking context */
-      outline: none;
-      box-shadow: none;
-      padding: 0;
-      width: 100%;
-      background: transparent;
-      border: none;
-      color: var(--paper-input-container-input-color, --primary-text-color);
+        @apply(--paper-transition-easing);
+      }
 
-      @apply(--paper-font-subhead);
-      @apply(--paper-input-container-input);
-    }
+      :host-context([dir="rtl"]) .input-content.label-is-floating ::content label,
+      :host-context([dir="rtl"]) .input-content.label-is-floating ::content .paper-input-label {
+        /* TODO(noms): Figure out why leaving the width at 133% before the animation
+         * actually makes
+         * it wider on the right side, not left side, as you would expect in RTL */
+        width: 100%;
+        -webkit-transform-origin: right top;
+        transform-origin: right top;
+      }
 
-    /* Firefox sets a min-width on the input, which can cause layout issues */
-    .input-content ::content input {
-      min-width: 0;
-    }
+      .input-content.label-is-highlighted ::content label,
+      .input-content.label-is-highlighted ::content .paper-input-label {
+        color: var(--paper-input-container-focus-color, --default-primary-color);
 
-    .input-content ::content textarea {
-      resize: none;
-    }
+        @apply(--paper-input-container-label-focus);
+      }
 
-    .add-on-content.is-invalid ::content * {
-      color: var(--paper-input-container-invalid-color, --google-red-500);
-    }
+      .input-content.is-invalid ::content label,
+      .input-content.is-invalid ::content .paper-input-label {
+        color: var(--paper-input-container-invalid-color, --google-red-500);
+      }
 
-    .add-on-content.is-highlighted ::content * {
-      color: var(--paper-input-container-focus-color, --default-primary-color);
-    }
+      .input-content.label-is-hidden ::content label,
+      .input-content.label-is-hidden ::content .paper-input-label {
+        visibility: hidden;
+      }
 
-  </style><template><template is=dom-if if=[[!noLabelFloat]]><div class=floated-label-placeholder>&nbsp;</div></template><div class$=[[_computeInputContentClass(noLabelFloat,alwaysFloatLabel,focused,invalid,_inputHasContent)]]><content select=:not([add-on])></content></div><div class$=[[_computeUnderlineClass(focused,invalid)]]><div class="unfocused-line fit"></div><div class="focused-line fit"></div></div><div class$=[[_computeAddOnContentClass(focused,invalid)]]><content id=addOnContent select=[add-on]></content></div></template></dom-module><dom-module id=paper-input-error assetpath="../../../bower_components/paper-input/"><style>
+      .input-content ::content input,
+      .input-content ::content textarea,
+      .input-content ::content iron-autogrow-textarea,
+      .input-content ::content .paper-input-input {
+        position: relative; /* to make a stacking context */
+        outline: none;
+        box-shadow: none;
+        padding: 0;
+        width: 100%;
+        background: transparent;
+        border: none;
+        color: var(--paper-input-container-input-color, --primary-text-color);
+        -webkit-appearance: none;
+        text-align: inherit;
 
-    :host {
-      display: inline-block;
-      visibility: hidden;
-      float: left;
+        @apply(--paper-font-subhead);
+        @apply(--paper-input-container-input);
+      }
 
-      color: var(--paper-input-container-invalid-color, --google-red-500);
+      ::content [prefix] {
+        @apply(--paper-font-subhead);
+        @apply(--paper-input-prefix);
+      }
 
-      @apply(--paper-font-caption);
-      @apply(--paper-input-error);
-    }
+      ::content [suffix] {
+        @apply(--paper-font-subhead);
+        @apply(--paper-input-suffix);
+      }
 
-    :host([invalid]) {
-      visibility: visible;
-    };
+      /* Firefox sets a min-width on the input, which can cause layout issues */
+      .input-content ::content input {
+        min-width: 0;
+      }
 
-  </style><template><content></content></template></dom-module><dom-module id=paper-input-char-counter assetpath="../../../bower_components/paper-input/"><style>
+      .input-content ::content textarea {
+        resize: none;
+      }
 
-    :host {
-      display: inline-block;
-      float: right;
+      .add-on-content {
+        position: relative;
+      }
 
-      @apply(--paper-font-caption);
-      @apply(--paper-input-char-counter);
-    }
+      .add-on-content.is-invalid ::content * {
+        color: var(--paper-input-container-invalid-color, --google-red-500);
+      }
 
-  </style><template><span>[[_charCounterStr]]</span></template></dom-module><dom-module id=paper-input assetpath="../../../bower_components/paper-input/"><style>
+      .add-on-content.is-highlighted ::content * {
+        color: var(--paper-input-container-focus-color, --default-primary-color);
+      }
+    </style><template is=dom-if if=[[!noLabelFloat]]><div class=floated-label-placeholder>&nbsp;</div></template><div class$=[[_computeInputContentClass(noLabelFloat,alwaysFloatLabel,focused,invalid,_inputHasContent)]]><content select=[prefix] id=prefix></content><div class=label-and-input-container id=labelAndInputContainer><content select=:not([add-on]):not([prefix]):not([suffix])></content></div><content select=[suffix]></content></div><div class$=[[_computeUnderlineClass(focused,invalid)]]><div class=unfocused-line></div><div class=focused-line></div></div><div class$=[[_computeAddOnContentClass(focused,invalid)]]><content id=addOnContent select=[add-on]></content></div></template></dom-module><dom-module id=paper-input-error assetpath="../../../bower_components/paper-input/"><template><style>
+      :host {
+        display: inline-block;
+        visibility: hidden;
 
-    :host {
-      display: block;
-    }
+        color: var(--paper-input-container-invalid-color, --google-red-500);
 
-    input::-webkit-input-placeholder {
-      color: var(--paper-input-container-color, --secondary-text-color);
-    }
+        @apply(--paper-font-caption);
+        @apply(--paper-input-error);
+        position: absolute;
+        left:0;
+        right:0;
+      }
 
-    input:-moz-placeholder {
-      color: var(--paper-input-container-color, --secondary-text-color);
-    }
+      :host([invalid]) {
+        visibility: visible;
+      };
+    </style><content></content></template></dom-module><dom-module id=paper-input assetpath="../../../bower_components/paper-input/"><template><style>
+      :host {
+        display: block;
+      }
 
-    input::-moz-placeholder {
-      color: var(--paper-input-container-color, --secondary-text-color);
-    }
+      input::-webkit-input-placeholder {
+        color: var(--paper-input-container-color, --secondary-text-color);
+      }
 
-    input:-ms-input-placeholder {
-      color: var(--paper-input-container-color, --secondary-text-color);
-    }
+      input:-moz-placeholder {
+        color: var(--paper-input-container-color, --secondary-text-color);
+      }
 
-  </style><template><paper-input-container no-label-float=[[noLabelFloat]] always-float-label=[[_computeAlwaysFloatLabel(alwaysFloatLabel,placeholder)]] auto-validate$=[[autoValidate]] disabled$=[[disabled]] invalid=[[invalid]]><label hidden$=[[!label]]>[[label]]</label> <input is=iron-input id=input aria-labelledby$=[[_ariaLabelledBy]] aria-describedby$=[[_ariaDescribedBy]] disabled$=[[disabled]] bind-value={{value}} invalid={{invalid}} prevent-invalid-input=[[preventInvalidInput]] allowed-pattern=[[allowedPattern]] validator=[[validator]] type$=[[type]] pattern$=[[pattern]] maxlength$=[[maxlength]] required$=[[required]] autocomplete$=[[autocomplete]] autofocus$=[[autofocus]] inputmode$=[[inputmode]] minlength$=[[minlength]] name$=[[name]] placeholder$=[[placeholder]] readonly$=[[readonly]] list$=[[list]] size$=[[size]] autocapitalize$=[[autocapitalize]] autocorrect$=[[autocorrect]]><template is=dom-if if=[[errorMessage]]><paper-input-error>[[errorMessage]]</paper-input-error></template><template is=dom-if if=[[charCounter]]><paper-input-char-counter></paper-input-char-counter></template></paper-input-container></template></dom-module><dom-module id=cic-contributor assetpath="../cic-contributor/"><style>
+      input::-moz-placeholder {
+        color: var(--paper-input-container-color, --secondary-text-color);
+      }
+
+      input:-ms-input-placeholder {
+        color: var(--paper-input-container-color, --secondary-text-color);
+      }
+    </style><paper-input-container no-label-float=[[noLabelFloat]] always-float-label=[[_computeAlwaysFloatLabel(alwaysFloatLabel,placeholder)]] auto-validate$=[[autoValidate]] disabled$=[[disabled]] invalid=[[invalid]]><content select=[prefix]></content><label hidden$=[[!label]]>[[label]]</label> <input is=iron-input id=input aria-labelledby$=[[_ariaLabelledBy]] aria-describedby$=[[_ariaDescribedBy]] disabled$=[[disabled]] bind-value={{value}} invalid={{invalid}} prevent-invalid-input=[[preventInvalidInput]] allowed-pattern=[[allowedPattern]] validator=[[validator]] type$=[[type]] pattern$=[[pattern]] required$=[[required]] autocomplete$=[[autocomplete]] autofocus$=[[autofocus]] inputmode$=[[inputmode]] minlength$=[[minlength]] maxlength$=[[maxlength]] min$=[[min]] max$=[[max]] step$=[[step]] name$=[[name]] placeholder$=[[placeholder]] readonly$=[[readonly]] list$=[[list]] size$=[[size]] autocapitalize$=[[autocapitalize]] autocorrect$=[[autocorrect]] on-change=_onChange autosave$=[[autosave]] results$=[[results]] accept$=[[accept]] multiple$=[[multiple]]><content select=[suffix]></content><template is=dom-if if=[[errorMessage]]><paper-input-error>[[errorMessage]]</paper-input-error></template><template is=dom-if if=[[charCounter]]><paper-input-char-counter></paper-input-char-counter></template></paper-input-container></template></dom-module><dom-module id=cic-contributor assetpath="../cic-contributor/"><style>
 :host {display: block}
 :host paper-input,
 :host paper-icon-button {display: inline-block}
 :host .short {width: 4em}
-</style><template><paper-input id=name type=text error-message="Only text" label="Contributor's Name" value={{name}} on-keypress=_onKeyPress></paper-input><paper-input id=value type=number error-message="Only numbers" label=Value value={{value}} class=short on-keypress=_onKeyPress></paper-input><paper-icon-button class=destroy icon=clear on-click=destroy></paper-icon-button></template></dom-module><dom-module id=cic-utils assetpath="../cic-utils/"><template></template></dom-module><dom-module id=cic-contributors assetpath="../cic-contributors/"><template><cic-utils id=utils></cic-utils><template is=dom-repeat items={{contributors}}><cic-contributor name={{item.name}} value={{item.value}} index={{index}} on-destroy=destroy on-enter-press=add class=contributor></cic-contributor></template></template></dom-module><dom-module id=cic-result assetpath="../cic-result/"><template><div class="horizontal layout center-justified"><paper-item>Total&nbsp;=&nbsp;<span>{{_getValue(result.totalValue,1)}}</span></paper-item><paper-item>Payment&nbsp;=&nbsp;<span>{{_getValue(result.equalPayment,1)}}</span></paper-item></div><template is=dom-repeat items=[[result.values]]><div class="horizontal layout center-justified"><paper-item><strong>[[_getName(item.from)]]</strong>&nbsp;gives&nbsp;<strong>[[_getValue(item.value)]]</strong>&nbsp;to&nbsp;<strong>[[_getName(item.to)]]</strong></paper-item></div></template><div class="horizontal layout center-justified"><paper-item>SCREENSHOT @ SEND</paper-item></div><div class="horizontal layout center-justified"><paper-item><paper-button raised autofocus on-click=hide>OK</paper-button></paper-item></div></template></dom-module><dom-module id=cic-donate assetpath="../cic-donate/"><template><div class="horizontal layout center-justified"><paper-item><form action=https://www.paypal.com/cgi-bin/webscr method=post target=_top><input type=hidden name=cmd value=_s-xclick> <input type=hidden name=hosted_button_id value=GTXUXKUJNEUA4> <input type=image src=https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif border=0 name=submit alt="PayPal - The safer, easier way to pay online!"> <img border=0 src=https://www.paypalobjects.com/en_US/i/scr/pixel.gif width=1 height=1></form></paper-item></div><div class="horizontal layout center-justified"><paper-item><iframe frameborder=0 allowtransparency=true scrolling=no src="https://money.yandex.ru/embed/small.xml?account=410011409363409&amp;quickpay=small&amp;yamoney-payment-type=on&amp;button-text=06&amp;button-size=s&amp;button-color=white&amp;targets=%D0%9F%D0%BE%D0%B4%D0%B4%D0%B5%D1%80%D0%B6%D0%BA%D0%B0+%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B0+chip-in.me&amp;default-sum=200&amp;successURL=" width=146 height=31></iframe></paper-item></div><div class="horizontal layout center-justified"></div></template></dom-module></div><dom-module id=cic-main><style>
+</style><template><paper-input id=name type=text error-message="Only text" label="Contributor's Name" value={{name}} on-keypress=_onKeyPress></paper-input><paper-input id=value type=number error-message="Only numbers" label=Value value={{value}} class=short on-keypress=_onKeyPress></paper-input><paper-icon-button class=destroy icon=clear on-click=destroy></paper-icon-button></template></dom-module><dom-module id=cic-utils assetpath="../cic-utils/"><template></template></dom-module><dom-module id=cic-contributors assetpath="../cic-contributors/"><template><cic-utils id=utils></cic-utils><template is=dom-repeat items={{contributors}}><cic-contributor name={{item.name}} value={{item.value}} index={{index}} on-destroy=destroy on-enter-press=add class=contributor></cic-contributor></template></template></dom-module><dom-module id=cic-result assetpath="../cic-result/"><template><div class="horizontal layout center-justified"><paper-item>Total&nbsp;=&nbsp;<span>{{_getValue(result.totalValue,1)}}</span></paper-item><paper-item>Payment&nbsp;=&nbsp;<span>{{_getValue(result.equalPayment,1)}}</span></paper-item></div><template is=dom-repeat items=[[result.values]]><div class="horizontal layout center-justified"><paper-item><strong>[[_getName(item.from)]]</strong>&nbsp;gives&nbsp;<strong>[[_getValue(item.value)]]</strong>&nbsp;to&nbsp;<strong>[[_getName(item.to)]]</strong></paper-item></div></template><div class="horizontal layout center-justified"><paper-item>SCREENSHOT @ SEND</paper-item></div><div class="horizontal layout center-justified"><paper-item><paper-button raised autofocus on-click=hide>OK</paper-button></paper-item></div></template></dom-module><dom-module id=cic-donate assetpath="../cic-donate/"><template><div class="horizontal layout center-justified"><paper-item><form action=https://www.paypal.com/cgi-bin/webscr method=post target=_top><input type=hidden name=cmd value=_s-xclick> <input type=hidden name=hosted_button_id value=GTXUXKUJNEUA4> <input type=image src=https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif border=0 name=submit alt="PayPal - The safer, easier way to pay online!"> <img border=0 src=https://www.paypalobjects.com/en_US/i/scr/pixel.gif width=1 height=1></form></paper-item></div><div class="horizontal layout center-justified"><paper-item><iframe frameborder=0 allowtransparency=true scrolling=no src="https://money.yandex.ru/embed/small.xml?account=410011409363409&amp;quickpay=small&amp;yamoney-payment-type=on&amp;button-text=06&amp;button-size=s&amp;button-color=white&amp;targets=%D0%9F%D0%BE%D0%B4%D0%B4%D0%B5%D1%80%D0%B6%D0%BA%D0%B0+%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B0+chip-in.me&amp;default-sum=200&amp;successURL=" width=146 height=31></iframe></paper-item></div><div class="horizontal layout center-justified"></div></template></dom-module><dom-module id=cic-parse assetpath="../cic-parse/"><style>
+:host {display: block}
+:host paper-input,
+:host paper-icon-button {display: inline-block}
+:host .short {width: 4em}
+</style><template><cic-utils id=utils></cic-utils></template></dom-module></div><dom-module id=cic-main><style>
 :host small paper-item {
     font-size: 1em;
     min-height: 1em;
@@ -1942,4 +1979,4 @@
     color: #a8a8a8
 }
 
-</style><template><div hidden={{isResultsShown}}><div class="horizontal layout center-justified"><paper-item>Chip in calculator</paper-item></div><div class="horizontal layout center-justified"><small><paper-item>Please add people and how much they chipped in</paper-item></small></div><div class="horizontal layout center-justified"><paper-item><cic-contributors id=contributors contributors={{contributors}}></cic-contributors></paper-item></div><div class="horizontal layout center-justified"><paper-item><paper-button id=show-results raised on-click=showResults disabled>Show Result</paper-button><paper-button raised id=add on-click=add><iron-icon icon=add></iron-icon>Contributor</paper-button></paper-item></div><br><template is=dom-if if={{isReadyToCalculate}}><div class="horizontal layout center-justified"><paper-item>SCREENSHOT @ SEND to people above</paper-item></div></template><div class="horizontal layout center-justified"><small><paper-item><a href=https://twitter.com/kashesandr>@kashesandr</a></paper-item></small> <small><paper-item><a href=javascript:; on-click=_toggleDonation>donate</a></paper-item></small> <small><paper-item><a href=https://github.com/kashesandr/CIC>project on GitHub</a></paper-item></small></div></div><template is=dom-if if={{isResultsShown}}><cic-result id=result result=[[result]] on-hidden=hideResults></cic-result></template><br><div class="horizontal layout center-justified"><paper-item><cic-donate hidden={{isDonateHidden}}></cic-donate></paper-item></div><cic-utils id=utils></cic-utils></template></dom-module><script src=element.js></script></body></html>
+</style><template><div hidden={{isResultsShown}}><div class="horizontal layout center-justified"><paper-item>Chip in calculator</paper-item></div><div class="horizontal layout center-justified"><small><paper-item>Please add people and how much they chipped in</paper-item></small></div><div class="horizontal layout center-justified"><paper-item><cic-contributors id=contributors contributors={{contributors}}></cic-contributors></paper-item></div><div class="horizontal layout center-justified"><paper-item><paper-button id=show-results raised on-click=showResults disabled>Show Result</paper-button><paper-button raised id=add on-click=add><iron-icon icon=add></iron-icon>Contributor</paper-button></paper-item></div><br><template is=dom-if if={{isReadyToCalculate}}><div class="horizontal layout center-justified"><paper-item>SCREENSHOT @ SEND to people above</paper-item></div></template><div class="horizontal layout center-justified"><small><paper-item><a href=https://twitter.com/kashesandr>@kashesandr</a></paper-item></small> <small><paper-item><a href=javascript:; on-click=_toggleDonation>donate</a></paper-item></small> <small><paper-item><a href=https://github.com/kashesandr/CIC>project on GitHub</a></paper-item></small></div></div><template is=dom-if if={{isResultsShown}}><cic-result id=result result=[[result]] on-hidden=hideResults></cic-result></template><br><div class="horizontal layout center-justified"><paper-item><cic-donate hidden={{isDonateHidden}}></cic-donate></paper-item></div><cic-utils id=utils></cic-utils><cic-parse id=parse></cic-parse></template></dom-module><script src=element.js></script></body></html>

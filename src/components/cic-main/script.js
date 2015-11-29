@@ -1,33 +1,52 @@
 Polymer({
+
     is: "cic-main",
+
     properties: {
+        // ex: [{"name":"foo","value":123},{"bar":"123","value":1234}]
         "contributors": {
             type: Array,
             value: function(){return []}
         }
     },
+
     isReadyToCalculate: false,
+
     observers: [
         '_contributorsChanged(contributors.*)'
     ],
+
     ready: function(){
         this.result = {};
         this.add();
         this.isResultsShown = false;
         this.isDonateHidden = true;
     },
+
     showResults: function(){
+        this.$.parse.save(this.contributors);
+        this.$.router.redirect('result', 123);
         this.result = this._calculate( this.$.utils.clone(this.contributors) );
         this.isResultsShown = true;
         window.scrollTo(0, 0);
     },
+
     hideResults: function(){
         this.result = {};
         this.isResultsShown = false;
+        this.$.router.redirect('home');
     },
+
     add: function(){
         this.$.contributors.add()
     },
+
+    /**
+     * returns {"equalPayment":178.5,"totalValue":357,"values":[{"from":"foo","to":"bar","value":55.5}]}
+     * @param contributors
+     * @returns {*}
+     * @private
+     */
     _calculate: function(contributors){
         if (!this.isReadyToCalculate)
             return this.result = {};
@@ -94,9 +113,11 @@ Polymer({
             equalPayment: equalPayment
         };
     },
+
     _readyToCalculateResults: function(){
         return this.contributors.length > 1
     },
+
     _contributorsChanged: function(){
         this.contributors.forEach(function(d){
             d.value = parseFloat(d.value) || 0;
@@ -104,7 +125,15 @@ Polymer({
         this.isReadyToCalculate = this._readyToCalculateResults();
         this.$['show-results'].disabled = !this.isReadyToCalculate;
     },
+
     _toggleDonation: function(){
         this.isDonateHidden = !this.isDonateHidden;
+    },
+
+    pageChanged: function(e){
+        var page = e.detail.page;
+        var params = e.detail.params || null;
+
+        console.log(page, params);
     }
 });

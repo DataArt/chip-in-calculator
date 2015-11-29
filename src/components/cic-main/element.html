@@ -6,6 +6,8 @@
 <link rel="import" href="../cic-contributors/element.html">
 <link rel="import" href="../cic-result/element.html">
 <link rel="import" href="../cic-donate/element.html">
+<link rel="import" href="../cic-parse/element.html">
+<link rel="import" href="../cic-router/element.html">
 
 <dom-module id="cic-main">
     <link rel="import" type="css" href="style.css">
@@ -62,6 +64,8 @@
             </paper-item>
         </div>
         <cic-utils id="utils"></cic-utils>
+        <cic-parse id="parse" on-saved="savedResults"></cic-parse>
+        <cic-router id="router" on-page-changed="pageChanged"></cic-router>
     </template>
 </dom-module>
 
