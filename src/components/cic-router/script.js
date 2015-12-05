@@ -40,7 +40,7 @@ Polymer({
         }.bind(this);
 
         page('/home', currentPageChange('home'));
-        page('/result/:pointer', currentPageChange('result'));
+        page('/r/:pointer', currentPageChange('r'));
 
         page('*', function() {
             page.redirect('/home');

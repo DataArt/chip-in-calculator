@@ -27,9 +27,9 @@ Polymer({
     },
 
     onParseSaved: function(e){
-        // redirect to /result/<hash>
+        // redirect to /r/<hash>
         // where <hash. is e.detail
-        this.$.router.redirect('result', e.detail);
+        this.$.router.redirect('r', e.detail);
     },
 
     hideResults: function(){
@@ -50,7 +50,7 @@ Polymer({
             params = e.detail.params || null,
             selected = 0;
 
-        if (page == 'result') {
+        if (page == 'r') {
             selected = 1;
             this.$.parse.load(params.pointer, function(contributors){
                 this.contributors = contributors;
