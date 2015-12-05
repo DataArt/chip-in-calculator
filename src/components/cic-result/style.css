@@ -2,3 +2,9 @@
     @apply(--layout-horizontal);
     @apply(--layout-center-justified);
 }
+:host .link {
+    font-size: 80%;
+}
+:host .okay {
+    margin-top: 1em;
+}

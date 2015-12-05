@@ -19,25 +19,29 @@ Polymer({
     ],
 
     ready: function(){
-        this.result = {};
-        this.add();
+        this.$.router.init();
     },
 
     showResults: function(){
         this.$.parse.save(this.contributors);
-        this.result = this._calculate( this.$.utils.clone(this.contributors) );
-        window.scrollTo(0, 0);
+    },
+
+    onParseSaved: function(e){
+        // redirect to /result/<hash>
+        // where <hash. is e.detail
+        this.$.router.redirect('result', e.detail);
     },
 
     hideResults: function(){
         this.result = {};
-        this.$.router.redirect('home');
+        this._goHome();
     },
 
     add: function(){
         this.$.contributors.add();
     },
 
+    // change the view according to the router state
     pageChanged: function(e){
         if (!e || !e.detail || !e.detail.page)
             return;
@@ -46,15 +50,19 @@ Polymer({
             params = e.detail.params || null,
             selected = 0;
 
-        if (page == 'result')
+        if (page == 'result') {
             selected = 1;
+            this.$.parse.load(params.pointer, function(contributors){
+                this.contributors = contributors;
+                this.result = this._calculate( this.$.utils.clone(contributors) );
+            }.bind(this));
+        } else if (page == 'home') {
+            if (this.contributors.length == 0)
+                this.add();
+            selected = 0
+        }
 
         this.$.pages.setAttribute('selected', selected);
-    },
-
-    onParseSavedResults: function(e){
-        var id = e.detail;
-        this.$.router.redirect('result', id);
     },
 
     /**

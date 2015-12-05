@@ -1,5 +1,4 @@
 <link rel="import" href="../../../bower_components/polymer/polymer.html">
-<link rel="import" href="../../../bower_components/paper-item/paper-item.html">
 <link rel="import" href="../../../bower_components/paper-button/paper-button.html">
 <link rel="import" href="../cic-router/element.html">
 
@@ -10,22 +9,24 @@
         <cic-router id="router"></cic-router>
 
         <p class="centered">
-            Total&nbsp;=&nbsp;<span>{{_getValue(result.totalValue,1)}}</span>
+            Total&nbsp;=&nbsp;{{_getValue(result.totalValue,1)}}
+            Avg. Payment&nbsp;=&nbsp;{{_getValue(result.equalPayment,1)}}
         </p>
-        <p class="centered">
-            Payment&nbsp;=&nbsp;<span>{{_getValue(result.equalPayment,1)}}</span>
-        </p>
+
         <template is="dom-repeat" items="[[result.values]]">
             <p class="centered">
                 <strong>[[_getName(item.from)]]</strong>&nbsp;gives&nbsp;<strong>[[_getValue(item.value)]]</strong>&nbsp;to&nbsp;<strong>[[_getName(item.to)]]</strong>
             </p>
         </template>
-        <div class="centered">
-            Link to this results: <a href="{{link}}">{{link}}</a>
+
+        <div class="centered link">
+            Link to Results:&nbsp;<a href="{{link}}" target="_blank">{{link}}</a>
         </div>
-        <div class="centered">
+
+        <div class="centered okay">
             <paper-button raised autofocus on-click="_onClick">OK</paper-button>
         </div>
+
     </template>
 </dom-module>
 

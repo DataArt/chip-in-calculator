@@ -31,11 +31,5 @@ Polymer({
                 this.fire('enter-press');
             else
                 this._focus( this.$$('#value').$$('input') );
-    },
-    _onFocus: function(e){
-        //console.log(e);
-    },
-    _onBlur: function(e){
-        //console.log(e);
     }
 });

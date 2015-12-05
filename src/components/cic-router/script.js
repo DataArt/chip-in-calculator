@@ -11,31 +11,16 @@ Polymer({
         routerPath: {
             type: String,
             value: '/CIC/bower_components/page/page.js'
-        },
-        initialized: {
-            type: Boolean,
-            value: false,
-            notify: true
-        },
-        currentPage: {
-            type: String,
-            value: '/home',
-            notify: true
         }
     },
 
     ready: function(){
-        this.init(function(){
-            this.rules();
-            page({hashbang: true});
-        }.bind(this));
+        this.currentPage = '';
     },
 
-    init: function(callback){
-        this.$.utils.loadScript(
-            this.routerPath,
-            callback
-        );
+    init: function(){
+        this.rules();
+        page({hashbang: true});
     },
 
     rules: function () {
@@ -44,11 +29,13 @@ Polymer({
             return function(data) {
                 if (!data) data = {};
                 this.currentPage = page;
+                this.currentParams = data.params;
                 var result = {
                     page: this.currentPage,
                     params: data.params
                 };
                 this.fire('page-changed', result);
+                window.scrollTo(0, 0);
             }.bind(this);
         }.bind(this);
 
@@ -65,6 +52,14 @@ Polymer({
         var url = "/" + p;
         if (param) url += "/" + param;
         page.redirect( url );
+    },
+
+    getLocation: function(){
+        var link = '';
+
+        link = document.location.href;
+
+        return link
     }
 
 });

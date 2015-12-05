@@ -13,45 +13,33 @@ Polymer({
         parsePath: {
             type: String,
             value: '/CIC/bower_components/parse/parse.min.js'
-        },
-        initialized: {
-            type: Boolean,
-            value: false,
-            notify: true
         }
     },
     ready: function(){
-        this.init()
+        Parse.initialize(this.appId, this.jsId);
     },
-    init: function(callback){
-        this.$.utils.loadScript(
-            this.parsePath,
-            function(){
-                Parse.initialize(this.appId, this.jsId);
-                this.initialized = true;
-                if (callback) callback();
-            }.bind(this)
-        );
-    },
-    save: function(data, callback){
-        var _save = function(d){
-            var DataRawParse = Parse.Object.extend("data_raw");
-            var dataRawParse = new DataRawParse();
-            dataRawParse.save({data: d})
-                .then(function(e){
-                    var pointer = e.id;
-                    this.fire('saved', pointer);
-                    if (callback)
-                        callback(pointer)
-                }.bind(this));
-        }.bind(this);
 
-        if (!this.initialized)
-            this.init(_save(data));
-        else
-            _save(data)
+    save: function(data, callback){
+        var DataRawParse = Parse.Object.extend("data_raw");
+        var dataRawParse = new DataRawParse();
+        dataRawParse.save({data: data})
+            .then(function(e){
+                var pointer = e.id;
+                this.fire('saved', pointer);
+                if (callback) callback(pointer)
+            }.bind(this));
     },
-    load: function(pointer){
+
+    load: function(pointer, callback){
+
+        function success(parseObj){
+            if (callback) callback(parseObj.get('data'))
+        }
+
+        var DataRawParse = Parse.Object.extend("data_raw");
+        var query = new Parse.Query(DataRawParse);
+        query.get(pointer)
+            .then(success)
 
     }
 });

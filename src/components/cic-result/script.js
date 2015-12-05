@@ -3,13 +3,22 @@ Polymer({
     properties: {
         result: {
             type: Object,
-            value: function(){return {}},
+            value: function(){
+                return {
+                    values: [],
+                    totalValue: 0,
+                    equalPayment: 0
+                }
+            },
             notify: true
         }
     },
     ready: function(){
 
     },
+    observers: [
+        '_resultChanged(result.*)'
+    ],
     _getName: function(name){
         return name || 'Somebody'
     },
@@ -20,5 +29,8 @@ Polymer({
     },
     _onClick: function(){
         this.fire('ok-clicked');
+    },
+    _resultChanged: function(){
+        this.link = this.$.router.getLocation();
     }
 });
