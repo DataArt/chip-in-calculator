@@ -1,5 +1,8 @@
 Polymer({
     is: "cic-contributors",
+
+    _emptyContributor: {"name": "", "value": null},
+
     properties: {
         contributors: {
             type: Array,
@@ -13,6 +16,8 @@ Polymer({
     },
     add: function(){
         this.push('contributors', this.$.utils.clone(this._emptyContributor));
-    },
-    _emptyContributor: {"name": "", "value": 0}
+
+        // Polymer has a bug... So we need to make the value = null
+        this.contributors[this.contributors.length-1].value = null;
+    }
 });

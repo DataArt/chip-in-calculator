@@ -71,9 +71,13 @@ Polymer({
      * @returns {*}
      * @private
      */
-    _calculate: function(contributors){
+    _calculate: function(_contributors){
         if (!this.isReadyToCalculate)
             return this.result = {};
+
+        var contributors = _contributors.filter(function(item){
+            return item.value;
+        }.bind(this));
 
         var tmpArr = [],
             totalValue = 0,

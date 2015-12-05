@@ -57,5 +57,9 @@ Polymer({
         };
         t = document.getElementsByTagName('script')[0];
         t.parentNode.insertBefore(s, t);
+    },
+
+    isDefined: function(value){
+        return typeof value !== 'undefined';
     }
 });
