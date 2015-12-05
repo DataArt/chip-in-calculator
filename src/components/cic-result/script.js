@@ -32,5 +32,8 @@ Polymer({
     },
     _resultChanged: function(){
         this.link = this.$.router.getLocation();
+    },
+    _getLinkLabel: function(link){
+        return link.substr(7);
     }
 });
