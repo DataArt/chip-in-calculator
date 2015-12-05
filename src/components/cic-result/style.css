@@ -1,0 +1,4 @@
+:host .centered {
+    @apply(--layout-horizontal);
+    @apply(--layout-center-justified);
+}

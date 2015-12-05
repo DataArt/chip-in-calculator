@@ -5,28 +5,32 @@
 <dom-module id="cic-contributor">
     <link rel="import" type="css" href="style.css">
     <template>
-        <paper-input
-            id="name"
-            type="text"
-            error-message="Only text"
-            label="Contributor's Name"
-            value="{{name}}"
-            on-keypress="_onKeyPress">
-        </paper-input>
-        <paper-input
-            id="value"
-            type="number"
-            error-message="Only numbers"
-            label="Value"
-            value="{{value}}"
-            class="short"
-            on-keypress="_onKeyPress">
-        </paper-input>
-        <paper-icon-button
-            class="destroy"
-            icon="clear"
-            on-click="destroy">
-        </paper-icon-button>
+        <div class="centered">
+            <paper-input
+                id="name"
+                type="text"
+                error-message="Only text"
+                label="Contributor's Name"
+                value="{{name}}"
+                on-keypress="_onKeyPress"
+                on-focus="_onFocus"
+                on-blur="_onBlur"
+            >
+            </paper-input>
+            <paper-input
+                id="value"
+                type="number"
+                error-message="Only numbers"
+                label="Value"
+                value="{{value}}"
+                class="short"
+                on-keypress="_onKeyPress"
+                on-focus="_onFocus"
+                on-blur="_onBlur"
+            >
+            </paper-input>
+            <paper-icon-button class="destroy" icon="clear" on-click="destroy"></paper-icon-button>
+        </div>
     </template>
 </dom-module>
 

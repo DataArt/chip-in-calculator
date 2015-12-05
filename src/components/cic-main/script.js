@@ -7,10 +7,12 @@ Polymer({
         "contributors": {
             type: Array,
             value: function(){return []}
+        },
+        "isReadyToCalculate": {
+            type: Boolean,
+            value: false
         }
     },
-
-    isReadyToCalculate: false,
 
     observers: [
         '_contributorsChanged(contributors.*)'
@@ -19,26 +21,40 @@ Polymer({
     ready: function(){
         this.result = {};
         this.add();
-        this.isResultsShown = false;
-        this.isDonateHidden = true;
     },
 
     showResults: function(){
         this.$.parse.save(this.contributors);
-        this.$.router.redirect('result', 123);
         this.result = this._calculate( this.$.utils.clone(this.contributors) );
-        this.isResultsShown = true;
         window.scrollTo(0, 0);
     },
 
     hideResults: function(){
         this.result = {};
-        this.isResultsShown = false;
         this.$.router.redirect('home');
     },
 
     add: function(){
-        this.$.contributors.add()
+        this.$.contributors.add();
+    },
+
+    pageChanged: function(e){
+        if (!e || !e.detail || !e.detail.page)
+            return;
+
+        var page = e.detail.page,
+            params = e.detail.params || null,
+            selected = 0;
+
+        if (page == 'result')
+            selected = 1;
+
+        this.$.pages.setAttribute('selected', selected);
+    },
+
+    onParseSavedResults: function(e){
+        var id = e.detail;
+        this.$.router.redirect('result', id);
     },
 
     /**
@@ -126,14 +142,8 @@ Polymer({
         this.$['show-results'].disabled = !this.isReadyToCalculate;
     },
 
-    _toggleDonation: function(){
-        this.isDonateHidden = !this.isDonateHidden;
-    },
-
-    pageChanged: function(e){
-        var page = e.detail.page;
-        var params = e.detail.params || null;
-
-        console.log(page, params);
+    _goHome: function(){
+        this.$.router.redirect('home')
     }
+
 });

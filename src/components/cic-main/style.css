@@ -1,11 +1,26 @@
+* {
+    @apply(--paper-font-common-base);
+}
+
 :host small paper-item {
     font-size: 1em;
     min-height: 1em;
 }
-:host a,
-:host a:link,
-:host a:visited,
-:host a:hover,
-:host a:active {
-    color: #a8a8a8
+
+:host h1, h2 {
+    font-size: 1em;
+    margin: 0.7em 0;
+}
+:host h2 {
+    font-weight: normal;
+    font-size: 0.8em;
+}
+
+:host .centered {
+    @apply(--layout-horizontal);
+    @apply(--layout-center-justified);
+}
+
+:host .controls {
+    margin-top: 1em;
 }

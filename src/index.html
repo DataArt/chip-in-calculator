@@ -25,15 +25,13 @@
         ga('create', 'UA-65325141-1', 'auto');
         ga('send', 'pageview');
         // track JS errors
-        window.addEventListener('error', function(e) {
-            ga.push([
-                '_trackEvent',
-                'JavaScript Error',
-                e.message,
-                e.filename + ':  ' + e.lineno,
-                true
-            ]);
-        });
+        if (typeof window.onerror == "object")
+        {
+            window.onerror = function (err, url, line) {
+                if (ga)
+                    ga('send', 'exception', { 'exDescription': line + " " + err });
+            };
+        }
     </script>
     <!-- /Google Analytics counter -->
 

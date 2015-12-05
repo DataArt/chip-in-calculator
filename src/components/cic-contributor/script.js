@@ -11,7 +11,9 @@ Polymer({
             value: 0,
             notify: true
         },
-        index: { type: Number }
+        index: {
+            type: Number
+        }
     },
     destroy: function(){ this.fire('destroy', this.index) },
     ready: function(){
@@ -25,10 +27,15 @@ Polymer({
     },
     _onKeyPress: function(e){
         if (e.keyCode === 13)
-            // todo: clean up this
-            if (e.target.parentNode.parentNode.parentNode.id === 'value')
+            if (e.target.getAttribute('type') === 'number')
                 this.fire('enter-press');
             else
                 this._focus( this.$$('#value').$$('input') );
+    },
+    _onFocus: function(e){
+        //console.log(e);
+    },
+    _onBlur: function(e){
+        //console.log(e);
     }
 });

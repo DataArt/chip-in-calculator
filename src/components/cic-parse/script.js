@@ -33,7 +33,7 @@ Polymer({
             }.bind(this)
         );
     },
-    save: function(data){
+    save: function(data, callback){
         var _save = function(d){
             var DataRawParse = Parse.Object.extend("data_raw");
             var dataRawParse = new DataRawParse();
@@ -41,6 +41,8 @@ Polymer({
                 .then(function(e){
                     var pointer = e.id;
                     this.fire('saved', pointer);
+                    if (callback)
+                        callback(pointer)
                 }.bind(this));
         }.bind(this);
 

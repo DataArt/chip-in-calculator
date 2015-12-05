@@ -14,5 +14,5 @@ Polymer({
     add: function(){
         this.push('contributors', this.$.utils.clone(this._emptyContributor));
     },
-    _emptyContributor: {"name":"", "value":0}
+    _emptyContributor: {"name": "", "value": 0}
 });

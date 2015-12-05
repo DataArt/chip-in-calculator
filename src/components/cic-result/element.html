@@ -1,33 +1,30 @@
 <link rel="import" href="../../../bower_components/polymer/polymer.html">
 <link rel="import" href="../../../bower_components/paper-item/paper-item.html">
 <link rel="import" href="../../../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../cic-router/element.html">
 
 <dom-module id="cic-result">
+    <link rel="import" type="css" href="style.css">
     <template>
-        <div class="horizontal layout center-justified">
-            <paper-item>
-                Total&nbsp;=&nbsp;<span>{{_getValue(result.totalValue,1)}}</span>
-            </paper-item>
-            <paper-item>
-                Payment&nbsp;=&nbsp;<span>{{_getValue(result.equalPayment,1)}}</span>
-            </paper-item>
-        </div>
+
+        <cic-router id="router"></cic-router>
+
+        <p class="centered">
+            Total&nbsp;=&nbsp;<span>{{_getValue(result.totalValue,1)}}</span>
+        </p>
+        <p class="centered">
+            Payment&nbsp;=&nbsp;<span>{{_getValue(result.equalPayment,1)}}</span>
+        </p>
         <template is="dom-repeat" items="[[result.values]]">
-            <div class="horizontal layout center-justified">
-                <paper-item>
-                    <strong>[[_getName(item.from)]]</strong>&nbsp;gives&nbsp;<strong>[[_getValue(item.value)]]</strong>&nbsp;to&nbsp;<strong>[[_getName(item.to)]]</strong>
-                </paper-item>
-            </div>
+            <p class="centered">
+                <strong>[[_getName(item.from)]]</strong>&nbsp;gives&nbsp;<strong>[[_getValue(item.value)]]</strong>&nbsp;to&nbsp;<strong>[[_getName(item.to)]]</strong>
+            </p>
         </template>
-        <div class="horizontal layout center-justified">
-            <paper-item>
-                SCREENSHOT @ SEND
-            </paper-item>
+        <div class="centered">
+            Link to this results: <a href="{{link}}">{{link}}</a>
         </div>
-        <div class="horizontal layout center-justified">
-            <paper-item>
-                <paper-button raised autofocus on-click="hide">OK</paper-button>
-            </paper-item>
+        <div class="centered">
+            <paper-button raised autofocus on-click="_onClick">OK</paper-button>
         </div>
     </template>
 </dom-module>

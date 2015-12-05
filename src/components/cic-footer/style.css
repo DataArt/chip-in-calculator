@@ -1,0 +1,18 @@
+:host a {
+    padding: 0 1em;
+    color: #aaa;
+}
+:host a:hover {
+    color: #ccc;
+}
+:host .centered {
+    @apply(--layout-horizontal);
+    @apply(--layout-center-justified);
+}
+:host .links {
+    padding: 1em 0 0 0;
+    font-size: 80%;
+}
+:host .donation {
+    padding: 1em 0 0 0;
+}
