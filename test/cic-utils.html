@@ -14,6 +14,7 @@
     <cic-utils id="utils"></cic-utils>
 
     <script>
+
         test('utils.isNumeric', function(){
             var utils = document.getElementById('utils');
             [1,0,-1,1.83,-9.87].forEach(function(d){
@@ -23,6 +24,7 @@
                 assert.isFalse(utils.isNumeric(d));
             });
         });
+
         test('utils.clone', function(){
             [
                 {'b':2,'a':1,'c':3}, new Date(),
@@ -31,6 +33,33 @@
                 assert.deepEqual(d, utils.clone(d))
             });
         });
+
+        test('utils.calculate', function(){
+
+            assert.isDefined(utils.calculate);
+
+            var contributors = [
+                {"name":"Dimitri",  "value":50},
+                {"name":"Peter",    "value":40},
+                {"name":"Ann",      "value":30},
+                {"name":"Tom",      "value":0}
+            ];
+            var result = utils.calculate(contributors);
+
+            assert.isDefined(result, 'result defined');
+            assert.isDefined(result.values, 'result.values defined');
+
+            assert.equal(result.values.length, 2);
+
+            assert.equal(result.values[1].from, 'Tom');
+            assert.equal(result.values[1].to, 'Peter');
+            assert.equal(result.values[1].value, 10);
+
+            assert.equal(result.values[0].from, 'Tom');
+            assert.equal(result.values[0].to, 'Dimitri');
+            assert.equal(result.values[0].value, 20);
+
+        })
     </script>
 
 </body>
