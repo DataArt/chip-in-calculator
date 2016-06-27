@@ -9,7 +9,7 @@ var uglifyJs = require('gulp-uglify');
 var uglifyHtml = require('gulp-minify-html');
 var uglifyCss = require('gulp-minify-css');
 
-var vulcan = new Vulcanize({
+var vulcanize = new Vulcanize({
     inlineScripts: true,
     inlineCss: true,
     stripComments: true
@@ -18,7 +18,7 @@ var vulcan = new Vulcanize({
 var vulcanizeWrapper = function() {
     return through.obj(function(file, encoding, callback) {
         var gulpContext = this;
-        vulcan.process(file.path, function(err, data) {
+        vulcanize.process(file.path, function(err, data) {
             file.contents = new Buffer(data);
             gulpContext.push(file);
             callback();
@@ -27,9 +27,7 @@ var vulcanizeWrapper = function() {
 };
 
 gulp.task('clean', function(cb){
-    del([
-        'build/**/*'
-    ], cb)
+    del(['build/**/*'], cb)
 });
 gulp.task('vulcanize', function(){
     return gulp.src('src/components/cic-main/element.html')
