@@ -1,7 +1,6 @@
 var Vulcanize = require('vulcanize');
 var gulp = require('gulp');
 var through = require('through2');
-var path = require('path');
 var runSequence = require('run-sequence').use(gulp);
 var del = require('del');
 var crisper = require('gulp-crisper');

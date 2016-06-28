@@ -8,6 +8,11 @@ The app allows you to calculate how much and who should return the money within 
 It's made with polymer-project.org.
 
 ## Set up
+
+install node with npm
+
+run
+
 `npm install -g gulp`
 `npm install`
 

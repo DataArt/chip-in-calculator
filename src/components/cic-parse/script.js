@@ -1,6 +1,9 @@
 
 Polymer({
+    
+    // TODO: since the parse.com is going to be retired we need to find a new storage
     is: "cic-parse",
+    
     properties: {
         appId: {
             type: String,
@@ -15,6 +18,7 @@ Polymer({
             value: '/CIC/bower_components/parse/parse.min.js'
         }
     },
+    
     ready: function(){
         Parse.initialize(this.appId, this.jsId);
     },

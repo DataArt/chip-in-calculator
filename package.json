@@ -1,6 +1,6 @@
 {
-  "name": "CIC",
-  "version": "1.0.1",
+  "name": "chip-in-calculator",
+  "version": "1.1.1",
   "description": "chip in calculator",
   "main": "index.js",
   "scripts": {
@@ -21,11 +21,11 @@
     "polymer"
   ],
   "author": "Alexander Kasheverov",
-  "license": "GNU GENERAL PUBLIC LICENSE",
+  "license": "Apache 2",
   "bugs": {
-    "url": "https://github.com/kashesandr/CIC/issues"
+    "url": "https://github.com/DataArt/chip-in-calculator/issues"
   },
-  "homepage": "https://github.com/kashesandr/CIC",
+  "homepage": "https://github.com/DataArt/chip-in-calculator",
   "devDependencies": {
     "del": "^1.2.0",
     "gulp": "^3.9.0",
