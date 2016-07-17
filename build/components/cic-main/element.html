@@ -2195,7 +2195,7 @@ styles. All other styles should exist as single lines."
 :host {display: block}
 :host paper-input,
 :host paper-icon-button {display: inline-block}
-:host .short {width: 3.5em; margin-left: .5em}
+:host .short {width: 4em; margin-left: .5em}
 :host .centered {
     @apply(--layout-horizontal);
     @apply(--layout-center-justified);
@@ -2204,6 +2204,7 @@ styles. All other styles should exist as single lines."
     margin-top: 1em;
     margin-left: 0.3em;
 }
+
 </style><div class=centered><paper-input id=name type=text error-message="Only text" label=[[i18n.name]] value={{name}} on-keypress=_onKeyPress></paper-input><paper-input id=value type=number error-message="Only numbers" label=[[i18n.value]] value={{value}} class=short on-keypress=_onKeyPress></paper-input><paper-icon-button class=destroy icon=clear on-click=destroy></paper-icon-button></div></template></dom-module><dom-module id=cic-utils assetpath="../cic-utils/"><template></template></dom-module><dom-module id=cic-contributors assetpath="../cic-contributors/"><template><cic-utils id=utils></cic-utils><template is=dom-repeat items={{contributors}}><cic-contributor name={{item.name}} value={{item.value}} index={{index}} on-destroy=destroy on-enter-press=add class=contributor></cic-contributor></template></template></dom-module><dom-module id=cic-router assetpath="../cic-router/"><template><cic-utils id=utils></cic-utils></template></dom-module><dom-module id=cic-result assetpath="../cic-result/"><template><style>
 :host .centered {
     @apply(--layout-horizontal);
@@ -2215,7 +2216,7 @@ styles. All other styles should exist as single lines."
 :host .okay {
     margin-top: 1em;
 }
-</style><cic-router id=router></cic-router><p class=centered>[[i18n.total]]&nbsp;=&nbsp;{{_getValue(result.totalValue,1)}} [[i18n.average]]&nbsp;=&nbsp;{{_getValue(result.equalPayment,1)}}</p><template is=dom-repeat items=[[result.values]]><p class=centered><strong>[[_getName(item.from)]]</strong>&nbsp;[[i18n.gives]]&nbsp;<strong>[[_getValue(item.value)]]</strong>&nbsp;to&nbsp;<strong>[[_getName(item.to)]]</strong></p></template><div class="centered link">[[i18n.results_link]]&nbsp;<a href={{link}} target=_blank>{{_getLinkLabel(link)}}</a></div><div class="centered okay"><paper-button raised autofocus on-click=_onClick>OK</paper-button></div></template></dom-module><dom-module id=cic-footer assetpath="../cic-footer/"><template><style>
+</style><cic-router id=router></cic-router><p class=centered>[[i18n.total]]&nbsp;=&nbsp;{{_getValue(result.totalValue,1)}} [[i18n.average]]&nbsp;=&nbsp;{{_getValue(result.equalPayment,1)}}</p><template is=dom-repeat items=[[result.values]]><p class=centered><strong>[[_getName(item.from)]]</strong>&nbsp;[[i18n.gives]]&nbsp;<strong>[[_getValue(item.value)]]</strong>&nbsp;[[i18n.to]]&nbsp;<strong>[[_getName(item.to)]]</strong></p></template><div class="centered link">[[i18n.results_link]]&nbsp;<a href={{link}} target=_blank>{{_getLinkLabel(link)}}</a></div><div class="centered okay"><paper-button raised autofocus on-click=_onClick>OK</paper-button></div></template></dom-module><dom-module id=cic-footer assetpath="../cic-footer/"><template><style>
 :host a {
     padding: 0 1em;
     color: #aaa;

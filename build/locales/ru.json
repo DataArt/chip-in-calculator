@@ -1,0 +1,36 @@
+{
+  "greeting": {
+    "message": "Пожалуйста, добавьте участников и вложенную ими сумму"
+  },
+  "show_result": {
+    "message": "Показать результат"
+  },
+  "contributor": {
+    "message": "Участник"
+  },
+  "github": {
+    "message": "Проект на GitHub"
+  },
+  "name": {
+    "message": "Имя участника"
+  },
+  "value": {
+    "message": "Вклад"
+  },
+  "total": {
+    "message": "Всего"
+  },
+  "average": {
+    "message": "Средний вклад"
+  },
+  "gives": {
+    "message": "отдает"
+  },
+  "to": {
+    "message": ""
+  },
+  "results_link": {
+    "message": "Ссылка на результаты:"
+  }
+
+}
