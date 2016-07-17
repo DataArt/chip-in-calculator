@@ -1,6 +1,7 @@
 <link rel="import" href="../../../bower_components/polymer/polymer.html">
 <link rel="import" href="../../../bower_components/paper-button/paper-button.html">
 <link rel="import" href="../cic-router/element.html">
+<link rel="import" href="../../../bower_components/i18n-msg/i18n-msg-behavior.html">
 
 <dom-module id="cic-result">
     <link rel="import" type="css" href="style.css">
@@ -9,18 +10,18 @@
         <cic-router id="router"></cic-router>
 
         <p class="centered">
-            Total&nbsp;=&nbsp;{{_getValue(result.totalValue,1)}}
-            Avg. Payment&nbsp;=&nbsp;{{_getValue(result.equalPayment,1)}}
+            [[i18n.total]]&nbsp;=&nbsp;{{_getValue(result.totalValue,1)}}
+            [[i18n.average]]&nbsp;=&nbsp;{{_getValue(result.equalPayment,1)}}
         </p>
 
         <template is="dom-repeat" items="[[result.values]]">
             <p class="centered">
-                <strong>[[_getName(item.from)]]</strong>&nbsp;gives&nbsp;<strong>[[_getValue(item.value)]]</strong>&nbsp;to&nbsp;<strong>[[_getName(item.to)]]</strong>
+                <strong>[[_getName(item.from)]]</strong>&nbsp;[[i18n.gives]]&nbsp;<strong>[[_getValue(item.value)]]</strong>&nbsp;to&nbsp;<strong>[[_getName(item.to)]]</strong>
             </p>
         </template>
 
         <div class="centered link">
-            Link to Results:&nbsp;<a href="{{link}}" target="_blank">{{_getLinkLabel(link)}}</a>
+            [[i18n.results_link]]&nbsp;<a href="{{link}}" target="_blank">{{_getLinkLabel(link)}}</a>
         </div>
 
         <div class="centered okay">

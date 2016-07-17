@@ -1,5 +1,10 @@
 Polymer({
     is: "cic-result",
+
+    behaviors: [
+        i18nMsgBehavior
+    ],
+
     properties: {
         result: {
             type: Object,

@@ -53,15 +53,19 @@ gulp.task('minify:html', function(){
         .pipe(uglifyHtml())
         .pipe(gulp.dest('build'));
 });
+gulp.task('copy_locales', function(){
+    return gulp.src('src/locales/*.json')
+        .pipe(gulp.dest('build/locales/'))
+});
 
 gulp.task('default', function() {
     return runSequence(
         'clean',
         'vulcanize',
         'copy',
+        'copy_locales',
         //'minify:css',
         'minify:js',
         'minify:html'
     );
 });
-

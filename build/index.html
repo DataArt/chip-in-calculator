@@ -10,4 +10,14 @@
                     ga('send', 'exception', { 'exDescription': line + " " + err });
             };
         }
+    </script><script>
+        document.addEventListener('HTMLImportsLoaded', function() {
+            KnownLocales = ['en'];
+            ClientLocale = (window.navigator.userLanguage || window.navigator.language).slice(0,2);
+            IsKnownLocale = KnownLocales.indexOf(ClientLocale) > -1;
+            I18nMsg.lang = IsKnownLocale ? ClientLocale : 'en'
+            I18nMsg.url = 'locales';
+            Platform.performMicrotaskCheckpoint();
+        });
+
     </script><cic-main></cic-main></body></html>
