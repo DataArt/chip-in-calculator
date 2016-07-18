@@ -5,12 +5,14 @@
 <link rel="import" href="../../../bower_components/iron-icons/iron-icons.html">
 <link rel="import" href="../../../bower_components/iron-pages/iron-pages.html">
 <link rel="import" href="../../../bower_components/paper-styles/paper-styles-classes.html">
+<link rel="import" href="../../../bower_components/i18n-msg/i18n-msg-behavior.html">
 
 <link rel="import" href="../cic-contributors/element.html">
 <link rel="import" href="../cic-result/element.html">
 <link rel="import" href="../cic-footer/element.html">
 <link rel="import" href="../cic-parse/element.html">
 <link rel="import" href="../cic-router/element.html">
+<link rel="import" href="../cic-i18n/element.html">
 
 <dom-module id="cic-main">
     <link rel="import" type="css" href="style.css">
@@ -19,19 +21,20 @@
         <cic-utils id="utils"></cic-utils>
         <cic-parse id="parse" on-saved="onParseSaved"></cic-parse>
         <cic-router id="router" on-page-changed="pageChanged"></cic-router>
+        <cic-i18n id="i18n"></cic-i18n>
 
         <iron-pages id="pages" selected="0">
 
             <div>
                 <h1 class="centered">Chip In Calculator</h1>
-                <h2 class="centered">Please add people and how much they chipped in</h2>
+                <h2 class="centered">[[i18n.greeting]]</h2>
                 <cic-contributors id="contributors" contributors="{{contributors}}"></cic-contributors>
                 <div class="centered controls">
                     <paper-button id="show-results" on-click="showResults" disabled raised>
-                        Show Result
+                        [[i18n.show_result]]
                     </paper-button>
                     <paper-button raised id="add" on-click="add">
-                        <iron-icon icon="add"></iron-icon>Contributor
+                        <iron-icon icon="add"></iron-icon>[[i18n.contributor]]
                     </paper-button>
                 </div>
             </div>

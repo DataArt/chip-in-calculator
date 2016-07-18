@@ -1,0 +1,41 @@
+{
+  "greeting": {
+    "message": "Please add people and how much they chipped in"
+  },
+  "show_result": {
+    "message": "Show result"
+  },
+  "contributor": {
+    "message": "Contributor"
+  },
+  "github": {
+    "message": "project on GitHub"
+  },
+  "name": {
+    "message": "Contributor's Name"
+  },
+  "value": {
+    "message": "Value"
+  },
+  "total": {
+    "message": "Total"
+  },
+  "average": {
+    "message": "Avg. Payment"
+  },
+  "gives": {
+    "message": "gives"
+  },
+  "to": {
+    "message": "to"
+  },
+  "results_link": {
+    "message": "Link to Results:"
+  },
+  "from_somebody": {
+    "message": "Somebody"
+  },
+  "to_somebody": {
+    "message": "Somebody"
+  }
+}

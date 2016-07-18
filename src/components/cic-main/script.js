@@ -2,6 +2,10 @@ Polymer({
 
     is: "cic-main",
 
+    behaviors: [
+        i18nMsgBehavior
+    ],
+
     properties: {
         // ex: [{"name":"foo","value":123},{"bar":"123","value":1234}]
         "contributors": {
@@ -20,6 +24,7 @@ Polymer({
 
     ready: function(){
         this.$.router.init();
+        this.$.i18n.loadLocales();
     },
 
     showResults: function(){

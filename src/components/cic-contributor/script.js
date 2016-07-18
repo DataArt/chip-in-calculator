@@ -1,5 +1,10 @@
 Polymer({
     is: "cic-contributor",
+
+    behaviors: [
+        i18nMsgBehavior
+    ],
+    
     properties: {
         name: {
             type: String,

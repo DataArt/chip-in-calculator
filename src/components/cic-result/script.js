@@ -1,5 +1,10 @@
 Polymer({
     is: "cic-result",
+
+    behaviors: [
+        i18nMsgBehavior
+    ],
+
     properties: {
         result: {
             type: Object,
@@ -19,8 +24,13 @@ Polymer({
     observers: [
         '_resultChanged(result.*)'
     ],
-    _getName: function(name){
-        return name || 'Somebody'
+    _getNameFrom: function(name){
+
+        return name || i18nMsgBehavior.properties.i18n.value.from_somebody;
+    },
+    _getNameTo: function(name){
+
+        return name || i18nMsgBehavior.properties.i18n.value.to_somebody;
     },
     _getValue: function(value, precision){
         if (!precision)

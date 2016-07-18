@@ -1,7 +1,7 @@
 :host {display: block}
 :host paper-input,
 :host paper-icon-button {display: inline-block}
-:host .short {width: 3.5em; margin-left: .5em}
+:host .short {width: 4em; margin-left: .5em}
 :host .centered {
     @apply(--layout-horizontal);
     @apply(--layout-center-justified);
