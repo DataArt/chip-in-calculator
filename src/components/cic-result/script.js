@@ -24,8 +24,13 @@ Polymer({
     observers: [
         '_resultChanged(result.*)'
     ],
-    _getName: function(name){
-        return name || i18nMsgBehavior.properties.i18n.value.somebody;
+    _getNameFrom: function(name){
+
+        return name || i18nMsgBehavior.properties.i18n.value.from_somebody;
+    },
+    _getNameTo: function(name){
+
+        return name || i18nMsgBehavior.properties.i18n.value.to_somebody;
     },
     _getValue: function(value, precision){
         if (!precision)

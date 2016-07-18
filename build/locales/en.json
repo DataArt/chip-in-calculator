@@ -32,7 +32,10 @@
   "results_link": {
     "message": "Link to Results:"
   },
-  "somebody": {
+  "from_somebody": {
+    "message": "Somebody"
+  },
+  "to_somebody": {
     "message": "Somebody"
   }
 }

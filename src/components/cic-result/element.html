@@ -16,7 +16,7 @@
 
         <template is="dom-repeat" items="[[result.values]]">
             <p class="centered">
-                <strong>[[_getName(item.from)]]</strong>&nbsp;[[i18n.gives]]&nbsp;<strong>[[_getValue(item.value)]]</strong>&nbsp;[[i18n.to]]&nbsp;<strong>[[_getName(item.to)]]</strong>
+                <strong>[[_getNameFrom(item.from)]]</strong>&nbsp;[[i18n.gives]]&nbsp;<strong>[[_getValue(item.value)]]</strong>&nbsp;[[i18n.to]]&nbsp;<strong>[[_getNameTo(item.to)]]</strong>
             </p>
         </template>
 
