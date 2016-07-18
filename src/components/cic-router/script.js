@@ -55,11 +55,7 @@ Polymer({
     },
 
     getLocation: function(){
-        var link = '';
-
-        link = document.location.href;
-
-        return link
+        return document.location.href;
     }
 
 });
