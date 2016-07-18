@@ -31,5 +31,8 @@
   },
   "results_link": {
     "message": "Link to Results:"
+  },
+  "somebody": {
+    "message": "Somebody"
   }
 }

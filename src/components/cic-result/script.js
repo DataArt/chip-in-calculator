@@ -25,7 +25,7 @@ Polymer({
         '_resultChanged(result.*)'
     ],
     _getName: function(name){
-        return name || 'Somebody'
+        return name || i18nMsgBehavior.properties.i18n.value.somebody;
     },
     _getValue: function(value, precision){
         if (!precision)

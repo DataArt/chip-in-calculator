@@ -31,6 +31,8 @@
   },
   "results_link": {
     "message": "Ссылка на результаты:"
+  },
+  "somebody": {
+    "message": "Кто-то"
   }
-
 }
