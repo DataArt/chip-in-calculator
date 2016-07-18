@@ -2232,7 +2232,7 @@ styles. All other styles should exist as single lines."
     padding: 1em 0 0 0;
     font-size: 80%;
 }
-</style><div class="centered links"><a href=https://github.com/kashesandr>@kashesandr</a> <a href=https://github.com/DataArt/chip-in-calculator>[[i18n.github]]</a></div></template></dom-module><dom-module id=cic-parse assetpath="../cic-parse/"><template><cic-utils id=utils></cic-utils></template></dom-module></div><dom-module id=cic-main><template><style>
+</style><div class="centered links"><a href=https://github.com/kashesandr>@kashesandr</a> <a href=https://github.com/DataArt/chip-in-calculator>[[i18n.github]]</a></div></template></dom-module><dom-module id=cic-parse assetpath="../cic-parse/"><template><cic-utils id=utils></cic-utils></template></dom-module><dom-module id=cic-i18n assetpath="../cic-i18n/"><template></template></dom-module></div><dom-module id=cic-main><template><style>
 * {
     @apply(--paper-font-common-base);
 }
@@ -2260,4 +2260,4 @@ styles. All other styles should exist as single lines."
 :host .controls {
     margin-top: 1em;
 }
-</style><cic-utils id=utils></cic-utils><cic-parse id=parse on-saved=onParseSaved></cic-parse><cic-router id=router on-page-changed=pageChanged></cic-router><iron-pages id=pages selected=0><div><h1 class=centered>Chip In Calculator</h1><h2 class=centered>[[i18n.greeting]]</h2><cic-contributors id=contributors contributors={{contributors}}></cic-contributors><div class="centered controls"><paper-button id=show-results on-click=showResults disabled raised>[[i18n.show_result]]</paper-button><paper-button raised id=add on-click=add><iron-icon icon=add></iron-icon>[[i18n.contributor]]</paper-button></div></div><div><cic-result id=result result=[[result]] on-ok-clicked=_goHome></cic-result></div></iron-pages><cic-footer class=footer></cic-footer></template></dom-module><script src=element.js></script></body></html>
+</style><cic-utils id=utils></cic-utils><cic-parse id=parse on-saved=onParseSaved></cic-parse><cic-router id=router on-page-changed=pageChanged></cic-router><cic-i18n id=i18n></cic-i18n><iron-pages id=pages selected=0><div><h1 class=centered>Chip In Calculator</h1><h2 class=centered>[[i18n.greeting]]</h2><cic-contributors id=contributors contributors={{contributors}}></cic-contributors><div class="centered controls"><paper-button id=show-results on-click=showResults disabled raised>[[i18n.show_result]]</paper-button><paper-button raised id=add on-click=add><iron-icon icon=add></iron-icon>[[i18n.contributor]]</paper-button></div></div><div><cic-result id=result result=[[result]] on-ok-clicked=_goHome></cic-result></div></iron-pages><cic-footer class=footer></cic-footer></template></dom-module><script src=element.js></script></body></html>

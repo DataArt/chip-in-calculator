@@ -36,19 +36,6 @@
         }
     </script>
     <!-- /Google Analytics counter -->
-    <!-- i18n -->
-    <script>
-        document.addEventListener('HTMLImportsLoaded', function() {
-            KnownLocales = ['en', 'ru'];
-            ClientLocale = (window.navigator.userLanguage || window.navigator.language).slice(0,2);
-            IsKnownLocale = KnownLocales.indexOf(ClientLocale) > -1;
-            I18nMsg.lang = IsKnownLocale ? ClientLocale : 'en'
-            I18nMsg.url = 'locales';
-            Platform.performMicrotaskCheckpoint();
-        });
-
-    </script>
-    <!-- /i18n -->
 
     <cic-main></cic-main>
 

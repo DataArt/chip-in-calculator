@@ -12,6 +12,7 @@
 <link rel="import" href="../cic-footer/element.html">
 <link rel="import" href="../cic-parse/element.html">
 <link rel="import" href="../cic-router/element.html">
+<link rel="import" href="../cic-i18n/element.html">
 
 <dom-module id="cic-main">
     <link rel="import" type="css" href="style.css">
@@ -20,6 +21,7 @@
         <cic-utils id="utils"></cic-utils>
         <cic-parse id="parse" on-saved="onParseSaved"></cic-parse>
         <cic-router id="router" on-page-changed="pageChanged"></cic-router>
+        <cic-i18n id="i18n"></cic-i18n>
 
         <iron-pages id="pages" selected="0">
 

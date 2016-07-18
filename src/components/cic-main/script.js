@@ -24,6 +24,7 @@ Polymer({
 
     ready: function(){
         this.$.router.init();
+        this.$.i18n.loadLocales();
     },
 
     showResults: function(){
