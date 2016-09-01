@@ -1,25 +1,21 @@
 
 Polymer({
-    
-    // TODO: since the parse.com is going to be retired we need to find a new storage
+
     is: "cic-parse",
-    
+
     properties: {
         appId: {
             type: String,
-            value: 'OAliOF0kM1OcWQGr0VNvn33X3tgpjDxubZnRZT0W'
+            value: '4l7rfgTXjfA9Fn52jJWRagIvBjvrUQiACq1DmlGD'
         },
         jsId: {
             type: String,
-            value: 'qZLeXvmqhwO58xYl05XWpChNA0gZtqyfyqf5Rnn8'
-        },
-        parsePath: {
-            type: String,
-            value: '/CIC/bower_components/parse/parse.min.js'
+            value: '4JzH31AT3RJdQSIxnnHWYHO1rh7O4vHN7Jjq5CIB'
         }
     },
-    
+
     ready: function(){
+        Parse.serverURL = 'https://parseapi.back4app.com/';
         Parse.initialize(this.appId, this.jsId);
     },
 
