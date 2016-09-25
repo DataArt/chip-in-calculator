@@ -6,11 +6,11 @@ Polymer({
     properties: {
         appId: {
             type: String,
-            value: '4l7rfgTXjfA9Fn52jJWRagIvBjvrUQiACq1DmlGD'
+            value: 'OAliOF0kM1OcWQGr0VNvn33X3tgpjDxubZnRZT0W'
         },
         jsId: {
             type: String,
-            value: '4JzH31AT3RJdQSIxnnHWYHO1rh7O4vHN7Jjq5CIB'
+            value: 'qZLeXvmqhwO58xYl05XWpChNA0gZtqyfyqf5Rnn8'
         }
     },
 
