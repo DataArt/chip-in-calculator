@@ -13,5 +13,6 @@ Polymer({
         var isKnownLocale = this.knownLocales.indexOf(clientLocale) > -1;
         I18nMsg.lang = isKnownLocale ? clientLocale : 'en';
         I18nMsg.url = 'locales';
+        Platform.performMicrotaskCheckpoint();
     }
 });
