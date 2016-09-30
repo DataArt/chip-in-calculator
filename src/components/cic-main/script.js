@@ -28,6 +28,7 @@ Polymer({
     },
 
     showResults: function(){
+        this.$.spinner.startSpinner();
         this.$.parse.save(this.contributors);
     },
 
@@ -56,10 +57,13 @@ Polymer({
             selected = 0;
 
         if (page == 'r') {
+            this.$.spinner.startSpinner();
+
             selected = 1;
             this.$.parse.load(params.pointer, function(contributors){
                 this.contributors = contributors;
                 this.result = this._calculate( this.$.utils.clone(contributors) );
+                this.$.spinner.stopSpinner();
             }.bind(this));
         } else if (page == 'home') {
             if (this.contributors.length == 0)
