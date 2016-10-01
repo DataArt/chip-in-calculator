@@ -6,7 +6,7 @@ var del = require('del');
 var crisper = require('gulp-crisper');
 var uglifyJs = require('gulp-uglify');
 var uglifyHtml = require('gulp-minify-html');
-var uglifyCss = require('gulp-minify-css');
+var minifyInline = require('gulp-minify-inline');
 
 var vulcanize = new Vulcanize({
     inlineScripts: true,
@@ -38,10 +38,10 @@ gulp.task('copy', function(){
     return gulp.src('src/index.html')
         .pipe(gulp.dest('build'))
 });
-gulp.task('minify:css', function(){
-    return gulp.src('src/**/*.css')
-        .pipe(uglifyCss())
-        .pipe(gulp.dest('build'));
+gulp.task('minify:inline-css', function() {
+    return gulp.src('build/components/**/*.html')
+        .pipe(minifyInline({js: false}))
+        .pipe(gulp.dest('build/components'))
 });
 gulp.task('minify:js', function(){
     return gulp.src('build/**/*.js')
@@ -64,8 +64,8 @@ gulp.task('default', function() {
         'vulcanize',
         'copy',
         'copy_locales',
-        //'minify:css',
         'minify:js',
-        'minify:html'
+        'minify:html',
+        'minify:inline-css'
     );
 });
