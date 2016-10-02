@@ -23,7 +23,6 @@
         <cic-parse id="parse" on-saved="onParseSaved"></cic-parse>
         <cic-router id="router" on-page-changed="pageChanged"></cic-router>
         <cic-i18n id="i18n"></cic-i18n>
-        <cic-spinner id="spinner"></cic-spinner>
 
         <iron-pages id="pages" selected="0">
 
@@ -34,6 +33,7 @@
                 <div class="centered controls">
                     <paper-button id="show-results" on-click="showResults" disabled raised>
                         [[i18n.show_result]]
+                        <cic-spinner id="spinner" on-stop="_restoreResultsButton"></cic-spinner>
                     </paper-button>
                     <paper-button raised id="add" on-click="add">
                         <iron-icon icon="add"></iron-icon>[[i18n.contributor]]

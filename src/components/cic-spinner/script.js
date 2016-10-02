@@ -2,21 +2,19 @@ Polymer({
     is: "cic-spinner",
 
     properties: {
-        spinner : {
-            type: Object,
-            value: {}
+        "active": {
+            type: Boolean,
+            value: false
         }
     },
 
-    startSpinner: function(e) {
-        if (!this.spinner.active) {
-            this.spinner = document.querySelector('paper-spinner');
-        };
-        this.spinner.active = true;
+    startSpinner: function(){
+        this.active=true;
     },
 
-    stopSpinner: function(e) {
-        this.spinner.active = false;
+    stopSpinner: function(){
+        this.active=false;
+        this.fire('stop');
     },
 
 });

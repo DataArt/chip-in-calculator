@@ -22,12 +22,17 @@ Polymer({
         '_contributorsChanged(contributors.*)'
     ],
 
+    listeners: {
+        'data-loaded': '_stopSpinners'
+    },
+
     ready: function(){
         this.$.router.init();
         this.$.i18n.loadLocales();
     },
 
     showResults: function(){
+        this._hideResultsButton();
         this.$.spinner.startSpinner();
         this.$.parse.save(this.contributors);
     },
@@ -57,13 +62,12 @@ Polymer({
             selected = 0;
 
         if (page == 'r') {
-            this.$.spinner.startSpinner();
 
             selected = 1;
             this.$.parse.load(params.pointer, function(contributors){
                 this.contributors = contributors;
                 this.result = this._calculate( this.$.utils.clone(contributors) );
-                this.$.spinner.stopSpinner();
+                this.fire('data-loaded');
             }.bind(this));
         } else if (page == 'home') {
             if (this.contributors.length == 0)
@@ -100,7 +104,20 @@ Polymer({
     },
 
     _goHome: function(){
-        this.$.router.redirect('home')
+        this.$.router.redirect('home');
+    },
+
+    _hideResultsButton: function(){
+        this.$['show-results'].style.color='transparent';
+    },
+
+    _restoreResultsButton: function(){
+        this.$['show-results'].style.color='';
+    },
+
+    _stopSpinners: function(){
+        this.$.spinner.stopSpinner();
+        this.$.result.$.spinner.stopSpinner();
     }
 
 });

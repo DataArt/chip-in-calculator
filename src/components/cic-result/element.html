@@ -25,7 +25,10 @@
         </div>
 
         <div class="centered okay">
-            <paper-button raised autofocus on-click="_onClick">OK</paper-button>
+            <paper-button id="ok-button" raised autofocus on-click="_onClick">
+                OK
+                <cic-spinner id="spinner" on-stop="_restoreOKButton"></cic-spinner>
+            </paper-button>
         </div>
 
     </template>
