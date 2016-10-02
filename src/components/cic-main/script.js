@@ -22,10 +22,6 @@ Polymer({
         '_contributorsChanged(contributors.*)'
     ],
 
-    listeners: {
-        'data-loaded': '_stopSpinners'
-    },
-
     ready: function(){
         this.$.router.init();
         this.$.i18n.loadLocales();
@@ -67,7 +63,7 @@ Polymer({
             this.$.parse.load(params.pointer, function(contributors){
                 this.contributors = contributors;
                 this.result = this._calculate( this.$.utils.clone(contributors) );
-                this.fire('data-loaded');
+                this._stopSpinners();
             }.bind(this));
         } else if (page == 'home') {
             if (this.contributors.length == 0)
