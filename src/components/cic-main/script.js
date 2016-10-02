@@ -28,7 +28,6 @@ Polymer({
     },
 
     showResults: function(){
-        this._hideResultsButton();
         this.$.spinner.startSpinner();
         this.$.parse.save(this.contributors);
     },
@@ -58,6 +57,7 @@ Polymer({
             selected = 0;
 
         if (page == 'r') {
+            this.$.result.$.spinner.startSpinner();
 
             selected = 1;
             this.$.parse.load(params.pointer, function(contributors){
@@ -101,14 +101,6 @@ Polymer({
 
     _goHome: function(){
         this.$.router.redirect('home');
-    },
-
-    _hideResultsButton: function(){
-        this.$['show-results'].style.color='transparent';
-    },
-
-    _restoreResultsButton: function(){
-        this.$['show-results'].style.color='';
     },
 
     _stopSpinners: function(){
