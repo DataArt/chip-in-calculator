@@ -28,6 +28,7 @@ Polymer({
     },
 
     showResults: function(){
+        this.$.spinner.startSpinner();
         this.$.parse.save(this.contributors);
     },
 
@@ -56,10 +57,13 @@ Polymer({
             selected = 0;
 
         if (page == 'r') {
+            this.$.result.$.spinner.startSpinner();
+
             selected = 1;
             this.$.parse.load(params.pointer, function(contributors){
                 this.contributors = contributors;
                 this.result = this._calculate( this.$.utils.clone(contributors) );
+                this._stopSpinners();
             }.bind(this));
         } else if (page == 'home') {
             if (this.contributors.length == 0)
@@ -96,7 +100,12 @@ Polymer({
     },
 
     _goHome: function(){
-        this.$.router.redirect('home')
+        this.$.router.redirect('home');
+    },
+
+    _stopSpinners: function(){
+        this.$.spinner.stopSpinner();
+        this.$.result.$.spinner.stopSpinner();
     }
 
 });

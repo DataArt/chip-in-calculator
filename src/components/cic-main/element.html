@@ -13,6 +13,7 @@
 <link rel="import" href="../cic-parse/element.html">
 <link rel="import" href="../cic-router/element.html">
 <link rel="import" href="../cic-i18n/element.html">
+<link rel="import" href="../cic-spinner/element.html">
 
 <dom-module id="cic-main">
     <link rel="import" type="css" href="style.css">
@@ -32,6 +33,7 @@
                 <div class="centered controls">
                     <paper-button id="show-results" on-click="showResults" disabled raised>
                         [[i18n.show_result]]
+                        <cic-spinner id="spinner"></cic-spinner>
                     </paper-button>
                     <paper-button raised id="add" on-click="add">
                         <iron-icon icon="add"></iron-icon>[[i18n.contributor]]
