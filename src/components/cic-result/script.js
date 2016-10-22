@@ -39,7 +39,7 @@ Polymer({
         return name || i18nMsgBehavior.properties.i18n.value.to_somebody;
     },
     _getValue: function(value, rounding, precision){
-        if (rounding && rounding >= 0) {
+        if (rounding > 0) {
             return value ? this._round(value, rounding) : 0;
         };
 
