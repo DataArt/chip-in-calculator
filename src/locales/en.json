@@ -37,5 +37,20 @@
   },
   "to_somebody": {
     "message": "Somebody"
+  },
+  "rounding": {
+    "message": "Rounding"
+  },
+  "no_rounding": {
+    "message": "No rounding"
+  },
+  "round_half_up": {
+    "message": "Round half up"
+  },
+  "round_down": {
+    "message": "Round down"
+  },
+  "round_up": {
+    "message": "Round up"
   }
 }

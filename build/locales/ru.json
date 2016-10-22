@@ -37,5 +37,20 @@
   },
   "to_somebody": {
     "message": "Кому-то"
+  },
+  "rounding": {
+    "message": "Округление"
+  },
+  "no_rounding": {
+    "message": "Без округления"
+  },
+  "round_half_up": {
+    "message": "Математическое округление"
+  },
+  "round_down": {
+    "message": "Округлять вниз"
+  },
+  "round_up": {
+    "message": "Округлять вверх"
   }
 }
