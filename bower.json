@@ -30,7 +30,8 @@
     "parse": "~1.6.7",
     "page": "visionmedia/page.js#~1.7.1",
     "i18n-msg": "ebidel/i18n-msg#^1.0.5",
-    "paper-spinner": "PolymerElements/paper-spinner#^1.2.0"
+    "paper-spinner": "PolymerElements/paper-spinner#^1.2.0",
+    "paper-dropdown-menu": "PolymerElements/paper-dropdown-menu#^1.4.1"
   },
   "resolutions": {
     "polymer": "^1.5.0"

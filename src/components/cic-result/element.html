@@ -2,6 +2,9 @@
 <link rel="import" href="../../../bower_components/paper-button/paper-button.html">
 <link rel="import" href="../cic-router/element.html">
 <link rel="import" href="../../../bower_components/i18n-msg/i18n-msg-behavior.html">
+<link rel="import" href="../../../bower_components/paper-item/paper-item.html">
+<link rel="import" href="../../../bower_components/paper-listbox/paper-listbox.html">
+<link rel="import" href="../../../bower_components/paper-dropdown-menu/paper-dropdown-menu-light.html">
 
 <dom-module id="cic-result">
     <link rel="import" type="css" href="style.css">
@@ -10,15 +13,26 @@
         <cic-router id="router"></cic-router>
 
         <p class="centered">
-            [[i18n.total]]&nbsp;=&nbsp;{{_getValue(result.totalValue,1)}}
-            [[i18n.average]]&nbsp;=&nbsp;{{_getValue(result.equalPayment,1)}}
+            [[i18n.total]]&nbsp;=&nbsp;[[_getValue(result.totalValue, 0, 1)]]
+            [[i18n.average]]&nbsp;=&nbsp;[[_getValue(result.equalPayment, 0, 1)]]
         </p>
 
         <template is="dom-repeat" items="[[result.values]]">
             <p class="centered">
-                <strong>[[_getNameFrom(item.from)]]</strong>&nbsp;[[i18n.gives]]&nbsp;<strong>[[_getValue(item.value)]]</strong>&nbsp;[[i18n.to]]&nbsp;<strong>[[_getNameTo(item.to)]]</strong>
+                <strong>[[_getNameFrom(item.from)]]</strong>&nbsp;[[i18n.gives]]&nbsp;<strong>[[_getValue(item.value, rounding)]]</strong>&nbsp;[[i18n.to]]&nbsp;<strong>[[_getNameTo(item.to)]]</strong>
             </p>
         </template>
+
+        <div class="centered">
+            <paper-dropdown-menu-light label=[[i18n.rounding]]>
+                <paper-listbox class="dropdown-content" selected={{rounding}}>
+                    <paper-item>[[i18n.no_rounding]]</paper-item>
+                    <paper-item>[[i18n.round_half_up]]</paper-item>
+                    <paper-item>[[i18n.round_down]]</paper-item>
+                    <paper-item>[[i18n.round_up]]</paper-item>
+                </paper-listbox>
+            </paper-dropdown-menu-light>
+        </div>
 
         <div class="centered link">
             [[i18n.results_link]]&nbsp;<a href="{{link}}" target="_blank">{{_getLinkLabel(link)}}</a>
