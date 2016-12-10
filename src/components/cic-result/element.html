@@ -12,6 +12,10 @@
 
         <cic-router id="router"></cic-router>
 
+        <div class="centered link">
+            [[i18n.results_link]]&nbsp;<a href="{{link}}" target="_blank">{{_getLinkLabel(link)}}</a>
+        </div>
+
         <p class="centered">
             [[i18n.total]]&nbsp;=&nbsp;[[_getValue(result.totalValue, 0, 1)]]
             [[i18n.average]]&nbsp;=&nbsp;[[_getValue(result.equalPayment, 0, 1)]]
@@ -24,7 +28,7 @@
         </template>
 
         <div class="centered">
-            <paper-dropdown-menu-light label=[[i18n.rounding]]>
+            <paper-dropdown-menu-light class="rounding" label=[[i18n.rounding]]>
                 <paper-listbox class="dropdown-content" selected={{rounding}}>
                     <paper-item>[[i18n.no_rounding]]</paper-item>
                     <paper-item>[[i18n.round_half_up]]</paper-item>
@@ -32,13 +36,6 @@
                     <paper-item>[[i18n.round_up]]</paper-item>
                 </paper-listbox>
             </paper-dropdown-menu-light>
-        </div>
-
-        <div class="centered link">
-            [[i18n.results_link]]&nbsp;<a href="{{link}}" target="_blank">{{_getLinkLabel(link)}}</a>
-        </div>
-
-        <div class="centered okay">
             <paper-button id="ok-button" raised autofocus on-click="_onClick">
                 OK
                 <cic-spinner id="spinner"></cic-spinner>

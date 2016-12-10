@@ -9,7 +9,7 @@
 
 <link rel="import" href="../cic-contributors/element.html">
 <link rel="import" href="../cic-result/element.html">
-<link rel="import" href="../cic-footer/element.html">
+<link rel="import" href="../cic-header/element.html">
 <link rel="import" href="../cic-parse/element.html">
 <link rel="import" href="../cic-router/element.html">
 <link rel="import" href="../cic-i18n/element.html">
@@ -23,6 +23,8 @@
         <cic-parse id="parse" on-saved="onParseSaved"></cic-parse>
         <cic-router id="router" on-page-changed="pageChanged"></cic-router>
         <cic-i18n id="i18n"></cic-i18n>
+
+        <cic-header></cic-header>
 
         <iron-pages id="pages" selected="0">
 
@@ -46,8 +48,6 @@
             </div>
 
         </iron-pages>
-
-        <cic-footer class="footer"></cic-footer>
 
     </template>
 </dom-module>
