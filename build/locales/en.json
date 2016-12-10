@@ -9,7 +9,7 @@
     "message": "Contributor"
   },
   "github": {
-    "message": "project on GitHub"
+    "message": "See on GitHub"
   },
   "name": {
     "message": "Contributor's Name"
@@ -30,7 +30,7 @@
     "message": "to"
   },
   "results_link": {
-    "message": "Link to Results:"
+    "message": "Link:"
   },
   "from_somebody": {
     "message": "Somebody"

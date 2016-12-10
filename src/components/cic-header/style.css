@@ -1,9 +1,9 @@
 :host a {
     padding: 0 1em;
-    color: #aaa;
+    color: #ccc;
 }
 :host a:hover {
-    color: #ccc;
+    color: #777;
 }
 :host .centered {
     @apply(--layout-horizontal);

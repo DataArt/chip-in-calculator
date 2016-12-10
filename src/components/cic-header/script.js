@@ -1,5 +1,5 @@
 Polymer({
-    is: "cic-footer",
+    is: "cic-header",
     
     behaviors: [
         i18nMsgBehavior
